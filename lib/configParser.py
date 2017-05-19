@@ -35,7 +35,8 @@ if preferredActivityId[-1] == '':
 with open(outputPreferredActivityIdPath,'w') as preferredActivityIdFile:
     if '-' not in preferredActivityId[0]:
         preferredActivityIdFile.write('NA')
-    preferredActivityIdFile.write('\n'.join(preferredActivityId))
+    else:
+        preferredActivityIdFile.write('\n'.join(preferredActivityId))
 
 ###################### preferredActivityId #####################
 

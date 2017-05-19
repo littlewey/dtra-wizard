@@ -9,3 +9,4 @@ dtra-wizard is an UiPath based project
 4. create windows schedular task
 5. copy all files to C:/uiPath/
 6. check activity list view (column order etc..)
+7. hehe

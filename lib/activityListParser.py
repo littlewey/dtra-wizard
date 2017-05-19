@@ -32,9 +32,10 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
     itemActualDueDate = datetime.strptime(activityList[9],sourceTimeFormatDueDate).strftime(timeFormat)
     # assemble parsedActivityTable
     outputListForAppending = [activityList[1], itemWorkPackage, itemActivityID , activityList[5], activityList[6], itemActualStart, itemActualFinish, itemActualDueDate, activityList[10] ]
-    parsedActivityTable = parsedActivityTable + '\t'.join(outputListForAppending) + '\n'
-    # for myActivityList
+    if activityList[6] != "Completed":
+        parsedActivityTable = parsedActivityTable + '\t'.join(outputListForAppending) + '\n'
 
+    # for myActivityList
     myActivityListForAppending = [itemActivityID, activityList[6], activityList[4]]
     if activityList[6] != "Completed":
         myActivityList = myActivityList + '\t'.join(myActivityListForAppending) + '\n'

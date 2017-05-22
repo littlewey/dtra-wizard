@@ -1,12 +1,13 @@
 {
-  "description": "Simple Process Project",
-  "version": "2016.2.6274.33252",
-  "main": "Main.xaml",
-  "id": "DTRA-Wizard",
+  "name": "DTRA-Wizard",
+  "version": "2017.1.6351.20386",
+  "description": "",
+  "entryPoint": "Main.xaml",
   "dependencies": {},
-  "configurationOptions": {},
   "excludedData": [
     "Private:*",
     "*password*"
-  ]
+  ],
+  "packOptions": {},
+  "runtimeOptions": {}
 }

@@ -5,6 +5,7 @@ import string
 configInputPath = r'C:\uiPath\Preference_Configuration.csv'
 outputStartDatePath = r'C:\uiPath\var\startDate.var'
 outputPreferredActivityIdPath = r'C:\uiPath\var\preferredActivityId.list'
+outputIgnoredActivityIdPath = r'C:\uiPath\var\outputIgnoredActivityId.list'
 
 
 with open(configInputPath) as configCSVFile:
@@ -41,32 +42,20 @@ with open(outputPreferredActivityIdPath,'w') as preferredActivityIdFile:
 ###################### preferredActivityId #####################
 
 
-parsedActivityTable = str()
-myActivityList = str()
+###################### outputIgnoredActivityId #####################
 
-#parsedActivityTable = "ProjectName\tWorkPackage\tActivityID\tNumber\tStatus\tAssignment_Start\tAssignment_Finish\tDueDate\tDuration\n"
+ignoredActivityId = configCSV[2].split(',')[1:]
 
-myActivityList = "ActivityID           \tStatus    \tActivityName\n"
+# remove "," in the end if existed 
+if ignoredActivityId[-1] == '':
+    IgnoredActivityId.pop()
 
-for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData')[1:]:
-    activityList = activityItem.split('\n')
-    itemWorkPackage = activityList[2][:19] if len(activityList[2])>19 else activityList[2]
-    itemActivityID = activityList[3][:21] if len(activityList[3])>21 else activityList[3]
-    itemActualStart = datetime.strptime(activityList[7],sourceTimeFormatActul).strftime(timeFormat)
-    itemActualFinish = datetime.strptime(activityList[8],sourceTimeFormatActul).strftime(timeFormat)
-    itemActualDueDate = datetime.strptime(activityList[9],sourceTimeFormatDueDate).strftime(timeFormat)
-    # assemble parsedActivityTable
-    outputListForAppending = [activityList[1], itemWorkPackage, itemActivityID , activityList[5], activityList[6], itemActualStart, itemActualFinish, itemActualDueDate, activityList[10] ]
-    parsedActivityTable = parsedActivityTable + '\t'.join(outputListForAppending) + '\n'
-    # for myActivityList
+# write "NA" when field was not filled
 
-    myActivityListForAppending = [itemActivityID, activityList[6], activityList[4]]
-    if activityList[6] != "Completed":
-        myActivityList = myActivityList + '\t'.join(myActivityListForAppending) + '\n'
+with open(outputIgnoredActivityIdPath,'w') as IgnoredActivityIdFile:
+    if '-' not in ignoredActivityId[0]:
+        IgnoredActivityIdFile.write('NA')
+    else:
+        IgnoredActivityIdFile.write('\n'.join(ignoredActivityId))
 
-with open(activityListFileBeautifiedPath,'w') as outputFile:
-    outputFile.write(parsedActivityTable)
-# [debug]
-# print myActivityList
-with open(myActivityListPath,'w') as myActivityListOutputFile:
-    myActivityListOutputFile.write(myActivityList)
+###################### outputIgnoredActivityId #####################

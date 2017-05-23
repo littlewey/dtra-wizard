@@ -37,26 +37,32 @@ myActivityList = "ActivityID           \tStatus    \tActivityName\n"
 
 for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData')[1:]:
     activityList = activityItem.split('\n')
+    itemProjectName = activityList[1].strip()
     itemWorkPackage = activityList[2][:19] if len(activityList[2])>19 else activityList[2]
     itemActivityID = activityList[3][:21] if len(activityList[3])>21 else activityList[3]
-    itemActualStart = datetime.strptime(activityList[7],sourceTimeFormatActul).strftime(timeFormat)
-    itemActualFinish = datetime.strptime(activityList[8],sourceTimeFormatActul).strftime(timeFormat)
-    itemActualDueDate = datetime.strptime(activityList[9],sourceTimeFormatDueDate).strftime(timeFormat)
+    itemActivityName = activityList[4].strip()
+    itemPriority = activityList[5].strip()
+    itemStatus = activityList[6][:3]
+    itemActualStart = datetime.strptime(activityList[7].strip(),sourceTimeFormatActul).strftime(timeFormat)
+    itemActualFinish = datetime.strptime(activityList[8].strip(),sourceTimeFormatActul).strftime(timeFormat)
+    itemActualDueDate = datetime.strptime(activityList[9].strip(),sourceTimeFormatDueDate).strftime(timeFormat)
+    itemDuration = activityList[10]
     # assemble parsedActivityTable
-    outputListForAppending = [activityList[1], itemWorkPackage, itemActivityID , activityList[5], activityList[6], itemActualStart, itemActualFinish, itemActualDueDate, activityList[10] ]
-    if activityList[6] != "Completed":
+
+    outputListForAppending = [itemProjectName, itemWorkPackage, itemActivityID, itemPriority, itemStatus, itemActualStart, itemActualFinish, itemActualDueDate, itemDuration ]
+    if itemStatus != "Com":
         parsedActivityTable = parsedActivityTable + '\t'.join(outputListForAppending) + '\n'
 
     # handling state
 
-    if activityList[6] == "Paused":
+    if itemStatus == "Pau":
         pausedActivity = pausedActivity + itemActivityID + '\n'
-    if activityList[6] == "InProgress":
+    if itemStatus == "InP":
         inProgressActivity = "" + itemActivityID
 
     # for myActivityList
-    myActivityListForAppending = [itemActivityID, activityList[6], activityList[4]]
-    if activityList[6] != "Completed":
+    myActivityListForAppending = [itemActivityID, itemStatus, itemActivityName]
+    if itemStatus != "Com":
         myActivityList = myActivityList + '\t'.join(myActivityListForAppending) + '\n'
 
 with open(activityListFileBeautifiedPath,'w') as outputFile:

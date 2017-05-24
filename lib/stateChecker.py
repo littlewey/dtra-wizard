@@ -37,17 +37,19 @@ if ignoredActivityId != "NA":
 with open(dispatchedActivityPath) as dispatchedActivityFile:
     dispatchedActivity = dispatchedActivityFile.read()
 
+if dispatchedActivity != "NA":
+    dispatchedActivityList = dispatchedActivity.split()
 
 if inProgressActivity != "NA":
     state = "withInprogressed"
 # Inprogressed are NA from here
 elif pausedActivity != "NA":
     state = "noInprogressed_WithPaused"
-    # considering all paused activities in ignore list case
+    # considering all paused activity in ignore list case
     if ignoredActivityId != "NA":
-        pausedActivitiesList = pausedActivity.split()
-        numberOfPausedActivity = len(pausedActivitiesList)
-        for activity in pausedActivitiesList:
+        pausedActivityList = pausedActivity.split()
+        numberOfPausedActivity = len(pausedActivityList)
+        for activity in pausedActivityList:
             if activity in ignoredActivityIdList:
                 numberOfPausedActivity = numberOfPausedActivity - 1
         if numberOfPausedActivity <= 0:
@@ -57,6 +59,15 @@ elif pausedActivity != "NA":
     # dispatched:Yes
 elif dispatchedActivity != "NA":
     state = "noInprogressedNoPaused_WithDispatched"
+    # considering all dispatched activity in ignore list case
+    if ignoredActivityId != "NA":
+        dispatchedActivityList = dispatchedActivity.split()
+        numberOfdispatchedActivity = len(dispatchedActivityList)
+        for activity in dispatchedActivityList:
+            if activity in ignoredActivityIdList:
+                numberOfdispatchedActivity = numberOfdispatchedActivity - 1
+        if numberOfdispatchedActivity <= 0:
+            state = "NA"
 else:
     state = "NA"
 

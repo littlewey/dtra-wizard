@@ -5,7 +5,7 @@ import string
 configInputPath = r'C:\uiPath\Preference_Configuration.csv'
 outputStartDatePath = r'C:\uiPath\var\startDate.var'
 outputPreferredActivityIdPath = r'C:\uiPath\var\preferredActivityId.list'
-outputIgnoredActivityIdPath = r'C:\uiPath\var\outputIgnoredActivityId.list'
+outputIgnoredActivityIdPath = r'C:\uiPath\var\ignoredActivityId.list'
 
 
 with open(configInputPath) as configCSVFile:

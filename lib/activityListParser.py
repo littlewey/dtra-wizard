@@ -9,6 +9,7 @@ activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var
 
 pausedActivityPath = r'C:\uiPath\var\pausedActivity.list'
 inProgressActivityPath = r'C:\uiPath\var\inProgressActivity.var'
+dispatchedActivityPath = r'C:\uiPath\var\dispatchedActivity.list'
 
 
 myActivityListPath = r'C:\uiPath\myActivityList.txt'
@@ -27,6 +28,7 @@ parsedActivityTable = str()
 
 pausedActivity = str()
 inProgressActivity = str()
+dispatchedActivity = str()
 
 myActivityList = str()
 
@@ -38,6 +40,7 @@ myActivityList = "ActivityID           \tStatus    \tActivityName\n"
 for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData')[1:]:
     activityList = activityItem.split('\n')
     itemProjectName = activityList[1].strip()
+    # here we limit itemWorkPackage itemActivityID itemStatus to fixed length to make datatable generation working fine in UiPath
     itemWorkPackage = activityList[2][:19] if len(activityList[2])>19 else activityList[2]
     itemActivityID = activityList[3][:21] if len(activityList[3])>21 else activityList[3]
     itemActivityName = activityList[4].strip()
@@ -46,6 +49,7 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
     itemActualStart = datetime.strptime(activityList[7].strip(),sourceTimeFormatActul).strftime(timeFormat)
     itemActualFinish = datetime.strptime(activityList[8].strip(),sourceTimeFormatActul).strftime(timeFormat)
     itemActualDueDate = datetime.strptime(activityList[9].strip(),sourceTimeFormatDueDate).strftime(timeFormat)
+    # note to strip() itemDuration will lead datatable generation issues in UiPath, here we leave it as it is.
     itemDuration = activityList[10]
     # assemble parsedActivityTable
 
@@ -59,6 +63,8 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
         pausedActivity = pausedActivity + itemActivityID + '\n'
     if itemStatus == "InP":
         inProgressActivity = "" + itemActivityID
+    if itemStatus == "Dis":
+        dispatchedActivity = dispatchedActivity + itemActivityID + '\n'
 
     # for myActivityList
     myActivityListForAppending = [itemActivityID, itemStatus, itemActivityName]
@@ -79,6 +85,13 @@ if inProgressActivity == "":
 
 with open(inProgressActivityPath,'w') as inProgressActivityFile:
     inProgressActivityFile.write(inProgressActivity)
+
+if dispatchedActivity == "":
+    dispatchedActivity = "NA"
+
+with open(dispatchedActivityPath,'w') as dispatchedActivityFile:
+    dispatchedActivityFile.write(dispatchedActivity)
+
 
 # [debug]
 # print myActivityList

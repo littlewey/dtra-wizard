@@ -6,7 +6,7 @@ configInputPath = r'C:\uiPath\Preference_Configuration.csv'
 outputStartDatePath = r'C:\uiPath\var\startDate.var'
 outputPreferredActivityIdPath = r'C:\uiPath\var\preferredActivityId.list'
 outputIgnoredActivityIdPath = r'C:\uiPath\var\ignoredActivityId.list'
-
+outputCompleteScheduleRatePath = r'C:\uiPath\var\completeScheduleRate.var'
 
 with open(configInputPath) as configCSVFile:
     configCSV = configCSVFile.read().split('\n')
@@ -59,3 +59,17 @@ with open(outputIgnoredActivityIdPath,'w') as IgnoredActivityIdFile:
         IgnoredActivityIdFile.write('\n'.join(ignoredActivityId))
 
 ###################### outputIgnoredActivityId #####################
+
+
+###################### outputCompleteScheduleRate #####################
+
+# write only when field was filled 
+if '%' not in configCSV[3].split(',')[1]:
+    completeScheduleRate = "0.94"
+else:
+    completeScheduleRate = "0." + configCSV[3].split(',')[1][:-1]
+
+with open(outputCompleteScheduleRatePath,'w') as outputCompleteScheduleRateFile:
+    outputCompleteScheduleRateFile.write(completeScheduleRate)
+
+###################### outputCompleteScheduleRate #####################

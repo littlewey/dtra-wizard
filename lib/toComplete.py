@@ -37,4 +37,5 @@ for line in activityList:
 duration = timedelta(hours=int(durationString.split(":")[0]),minutes=int(durationString.split(":")[1])) 
 
 if duration.total_seconds()*completeScheduleRate - inProgressedDuration.total_seconds() - (datetime.now()-startedTime).total_seconds():
-	
+    
+    

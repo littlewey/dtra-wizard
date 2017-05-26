@@ -8,3 +8,7 @@ firstMondayOfWeekPath = r'C:\uiPath\var\startDate.var'
 firstMondayOfWeek = str(datetime.today().month)+"/"+str(datetime.today().day-datetime.today().weekday())+"/"+str(datetime.today().year) + " "
 with open(firstMondayOfWeekPath,'w') as outputFile:
     outputFile.write(firstMondayOfWeek)
+
+
+# log
+print str(datetime.now()) + " firstMondayOfWeek.py firstMondayOfWeek : \n" + firstMondayOfWeek + "\n"

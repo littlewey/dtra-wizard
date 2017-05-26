@@ -38,3 +38,5 @@ for activity in preferredActivityId:
 
 with open(activityIdToStartPath,'w') as activityIdToStartFile:
     activityIdToStartFile.write(activityIdToStart)
+# log
+print str(datetime.now()) + " activityIdToStart : \n" + activityIdToStart + "\n"

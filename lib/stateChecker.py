@@ -74,3 +74,12 @@ else:
 
 with open(stateCodePath,'w') as stateFile:
     stateFile.write(stateCode[state])
+
+
+# log
+print str(datetime.now()) + " state : \n" + state + "\n"
+print str(datetime.now()) + " stateCode[state] : \n" + stateCode[state] + "\n"
+print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
+print str(datetime.now()) + " inProgressActivity : \n" + inProgressActivity + "\n"
+print str(datetime.now()) + " ignoredActivityId : \n" + ignoredActivityId + "\n"
+print str(datetime.now()) + " dispatchedActivity : \n" + dispatchedActivity + "\n"

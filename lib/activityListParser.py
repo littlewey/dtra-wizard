@@ -36,7 +36,7 @@ myActivityList = str()
 
 #parsedActivityTable = "ProjectName\tWorkPackage\tActivityID\tNumber\tStatus\tAssignment_Start\tAssignment_Finish\tDueDate\tDuration\n"
 
-myActivityList = "ActivityID           \tStatus    \tActivityName\n"
+myActivityList = "ActivityID           \tSta\tActivityName\n"
 
 for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData')[1:]:
     activityList = activityItem.split('\n')
@@ -75,26 +75,40 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
 with open(activityListFileBeautifiedPath,'w') as outputFile:
     outputFile.write(parsedActivityTable)
 
+# log
+print str(datetime.now()) + " parsedActivityTable : \n" + parsedActivityTable + "\n"
+
+
 if pausedActivity == "":
     pausedActivity = "NA"
 
 with open(pausedActivityPath,'w') as pausedActivityFile:
     pausedActivityFile.write(pausedActivity)
+# log
+print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
+
 
 if inProgressActivity == "":
     inProgressActivity = "NA"
 
 with open(inProgressActivityPath,'w') as inProgressActivityFile:
     inProgressActivityFile.write(inProgressActivity)
+# log
+print str(datetime.now()) + " inProgressActivity : \n" + inProgressActivity + "\n"
+
 
 if dispatchedActivity == "":
     dispatchedActivity = "NA"
 
 with open(dispatchedActivityPath,'w') as dispatchedActivityFile:
     dispatchedActivityFile.write(dispatchedActivity)
-
+# log
+print str(datetime.now()) + " dispatchedActivity : \n" + dispatchedActivity + "\n"
 
 # [debug]
 # print myActivityList
 with open(myActivityListPath,'w') as myActivityListOutputFile:
     myActivityListOutputFile.write(myActivityList)
+
+# log
+print str(datetime.now()) + " myActivityList : \n" + myActivityList + "\n"

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*- 
 #!/usr/bin/python
 import string
+from datetime import date
+from datetime import datetime
 
 configInputPath = r'C:\uiPath\Preference_Configuration.csv'
 outputStartDatePath = r'C:\uiPath\var\startDate.var'
@@ -18,6 +20,9 @@ preferredStartDate = configCSV[0].split(',')[1]
 if '/' in preferredStartDate:
     with open(outputStartDatePath,'w') as outputStartDateFile:
         outputStartDateFile.write(preferredStartDate)
+
+# log
+print str(datetime.now()) + " preferredStartDate : \n" + preferredStartDate + "\n"
 
 ###################### preferredStartDate #####################
 
@@ -39,6 +44,9 @@ with open(outputPreferredActivityIdPath,'w') as preferredActivityIdFile:
     else:
         preferredActivityIdFile.write('\n'.join(preferredActivityId))
 
+
+# log
+print str(datetime.now()) + " preferredActivityId : \n" + '\n'.join(preferredActivityId) + "\n"
 ###################### preferredActivityId #####################
 
 
@@ -48,7 +56,7 @@ ignoredActivityId = configCSV[2].split(',')[1:]
 
 # remove "," in the end if existed 
 if ignoredActivityId[-1] == '':
-    IgnoredActivityId.pop()
+    ignoredActivityId.pop()
 
 # write "NA" when field was not filled
 
@@ -57,6 +65,8 @@ with open(outputIgnoredActivityIdPath,'w') as IgnoredActivityIdFile:
         IgnoredActivityIdFile.write('NA')
     else:
         IgnoredActivityIdFile.write('\n'.join(ignoredActivityId))
+# log
+print str(datetime.now()) + " ignoredActivityId : \n" + '\n'.join(ignoredActivityId) + "\n"
 
 ###################### outputIgnoredActivityId #####################
 
@@ -71,5 +81,8 @@ else:
 
 with open(outputCompleteScheduleRatePath,'w') as outputCompleteScheduleRateFile:
     outputCompleteScheduleRateFile.write(completeScheduleRate)
+
+# log
+print str(datetime.now()) + " completeScheduleRate : \n" + completeScheduleRate + "\n"
 
 ###################### outputCompleteScheduleRate #####################

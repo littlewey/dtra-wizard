@@ -4,6 +4,10 @@ import string
 from datetime import date
 from datetime import datetime 
 
+print "###############################"
+print "# check and output state code #"
+print "###############################"
+
 stateCode = {
     "NA" : "0",
     "withInprogressed" : "1",

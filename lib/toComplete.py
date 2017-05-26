@@ -4,6 +4,10 @@ import string
 from datetime import date
 from datetime import datetime, timedelta
 
+print "####################################################"
+print "# check complete time and build start/complete job #"
+print "####################################################"
+
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 
 activityDueTimeAdjustmentPath = r'C:\uiPath\var\log\activityDueTimeAdjustment.record'
@@ -37,5 +41,4 @@ for line in activityList:
 duration = timedelta(hours=int(durationString.split(":")[0]),minutes=int(durationString.split(":")[1])) 
 
 if duration.total_seconds()*completeScheduleRate - inProgressedDuration.total_seconds() - (datetime.now()-startedTime).total_seconds():
-    
     

@@ -4,6 +4,10 @@ import string
 from datetime import date
 from datetime import datetime, timedelta
 
+print "#################################"
+print "# select activity to be started #"
+print "#################################"
+
 activityIdToStart = str()
 dispatchedActivityList = list()
 statePath = r'C:\uiPath\var\state.var'
@@ -22,6 +26,10 @@ activityList = activityListString.strip().split("\n")
 
 with open(preferredActivityIdPath) as preferredActivityIdFile:
     preferredActivityIdString= preferredActivityIdFile.read()
+
+# log
+print str(datetime.now()) + " preferredActivityIdString : \n" + preferredActivityIdString + "\n"
+
 preferredActivityId = preferredActivityIdString.strip().split("\n")
 
 activityIdToStart = activityList[0].split('\t')[2]
@@ -34,6 +42,8 @@ for line in activityList:
 for activity in preferredActivityId:
     if activity in dispatchedActivityList:
         activityIdToStart = activity
+        # log
+        print str(datetime.now()) + " preferredActivityId selected : \n" + activity + "\n"
         break
 
 with open(activityIdToStartPath,'w') as activityIdToStartFile:

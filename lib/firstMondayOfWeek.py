@@ -4,6 +4,10 @@ from datetime import date
 from datetime import datetime
 import string
 
+print "###########################"
+print "# caculate current Monday #"
+print "###########################"
+
 firstMondayOfWeekPath = r'C:\uiPath\var\startDate.var'
 firstMondayOfWeek = str(datetime.today().month)+"/"+str(datetime.today().day-datetime.today().weekday())+"/"+str(datetime.today().year) + " "
 with open(firstMondayOfWeekPath,'w') as outputFile:

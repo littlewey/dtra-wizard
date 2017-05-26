@@ -4,6 +4,10 @@ import string
 from datetime import date
 from datetime import datetime
 
+print "#################################"
+print "# parse configuration variables #"
+print "#################################"
+
 configInputPath = r'C:\uiPath\Preference_Configuration.csv'
 outputStartDatePath = r'C:\uiPath\var\startDate.var'
 outputPreferredActivityIdPath = r'C:\uiPath\var\preferredActivityId.list'

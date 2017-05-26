@@ -5,6 +5,10 @@ from datetime import date
 from datetime import datetime 
 from datetime import timedelta 
 
+print "###############################"
+print "# parse the activities listed #"
+print "###############################"
+
 activityListFilePath = r'C:\uiPath\var\activityListValueOriginal.var'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 

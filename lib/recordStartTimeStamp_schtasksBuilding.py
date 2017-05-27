@@ -4,17 +4,17 @@ import string
 from datetime import date
 from datetime import datetime, timedelta
 
-print "############################################"
-print "# record start time and build complete job #"
-print "############################################"
+print "#####################################################"
+print "# Record start time and build complete job; STATE:3 #"
+print "#####################################################"
 
 activityIdStartedPath = r'C:\uiPath\var\activityIdToStart.var'
-startTimeStampRecordPath = r'C:\uiPath\var\startTimeStampRecord.list'
+startTimeStampPath = r'C:\uiPath\var\startTimeStamp.record'
 schtasksPrefixPath = r'C:\uiPath\lib\schtasksPrefix.line'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 completeScheduleRatePath = r'C:\uiPath\var\completeScheduleRate.var'
 schtasksCommandState3Path = r'C:\uiPath\var\schtasksCommandState3.var'
-
+lastStartActivityDatePath = r'C:\uiPath\var\lastStartActivityDate.var'
 
 with open(activityIdStartedPath) as activityIdStartedFile:
     activityIdStarted = activityIdStartedFile.read()
@@ -35,8 +35,8 @@ print str(datetime.now()) + " timeStamp : \n" + timeStamp + "\n"
 
 recordLine = timeStamp + "\t" + activityIdStarted + "\n"
 # append record list here
-with open(startTimeStampRecordPath,'a') as startTimeStampRecordFile:
-    startTimeStampRecordFile.write(recordLine)
+with open(startTimeStampPath,'a') as startTimeStampFile:
+    startTimeStampFile.write(recordLine)
 
 
 # log
@@ -44,6 +44,16 @@ print str(datetime.now()) + " recordLine : \n" + recordLine + "\n"
 
 # debug command format
 # print schtasksPrefix + r"  /SD 05/19/2017 /ST 21:04"
+
+
+lastStartActivityDate = datetime.now().strftime('%m/%d/%Y')
+with open(lastStartActivityDatePath,'w') as lastStartActivityDateFile:
+    lastStartActivityDateFile.write(lastStartActivityDate)
+
+# log
+print str(datetime.now()) + " lastStartActivityDate : \n" + lastStartActivityDate + "\n"
+
+
 
 # caculate schtasks start datetime
 

@@ -10,11 +10,9 @@ print "#################################"
 
 activityIdToStart = str()
 dispatchedActivityList = list()
-statePath = r'C:\uiPath\var\state.var'
-state = str()
 
-activityDueTimeAdjustmentPath = r'C:\uiPath\var\log\activityDueTimeAdjustment.record'
-activityDueTimeAdjustment = str()
+
+
 preferredActivityIdPath = r'C:\uiPath\var\preferredActivityId.list'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 

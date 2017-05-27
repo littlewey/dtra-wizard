@@ -10,8 +10,8 @@ print "####################################################"
 
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 
-activityDueTimeAdjustmentPath = r'C:\uiPath\var\log\activityDueTimeAdjustment.record'
-activityDueTimeAdjustment = str()
+activityProgressedDurationPath = r'C:\uiPath\var\log\activityProgressedDuration.record'
+activityProgressedDuration = str()
 
 with open(activityListFileBeautifiedPath) as activityListFile:
     activityListString= activityListFile.read()

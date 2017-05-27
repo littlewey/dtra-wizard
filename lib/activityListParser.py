@@ -6,7 +6,7 @@ from datetime import datetime
 from datetime import timedelta 
 
 print "###############################"
-print "# parse the activities listed #"
+print "# Parse the activities listed #"
 print "###############################"
 
 activityListFilePath = r'C:\uiPath\var\activityListValueOriginal.var'

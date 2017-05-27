@@ -15,3 +15,10 @@ schtasks /QUERY /TN toCompleteDTRA /XML | findstr  /i /c:"Command" /c:"Arguments
 or
 
 schtasks /QUERY /TN toCompleteDTRA /XML | findstr  ":"
+
+
+
+
+@ start pause @
+
+%LOCALAPPDATA%\UiPath\app-2017.1.6309.33850\UiRobot.exe /file C:\uiPath\process\pauseInProgressedActivity.xaml /monitor

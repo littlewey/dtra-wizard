@@ -30,6 +30,7 @@ Temporary Items
 lib/*.pye
 lib/*.pyc
 
+var/*.record
 var/*.var
 var/*.list
 var/log/*

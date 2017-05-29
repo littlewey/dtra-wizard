@@ -640,35 +640,40 @@
                                                           <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_14">
                                                             <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Close window" sap2010:WorkflowViewState.IdRef="CloseWindow_2" UseWindow="[IE_Window]" WaitForReady="INTERACTIVE" />
                                                             <FlowStep.Next>
-                                                              <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_16">
-                                                                <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="C:\uiPath\var\activityProgressedDuration.record" DisplayName="Start:activityProgressedDuration.record" FileName="notepad.exe" sap2010:WorkflowViewState.IdRef="StartProcess_9" />
+                                                              <FlowStep x:Name="__ReferenceID18" sap2010:WorkflowViewState.IdRef="FlowStep_23">
+                                                                <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="[&quot;/C echo [%DATE%_%TIME%  schtasks-cancel] &gt;&gt; C:\uiPath\var\log\schtasks.log &amp; &quot; + &quot;schtasks.exe /Delete /TN toCompleteDTRA /F&quot; + &quot; &gt;&gt; C:\uiPath\var\log\schtasks.log &amp; schtasks /QUERY /TN toCompleteDTRA /XML | findstr  : &gt;&gt; C:\uiPath\var\log\schtasks.log&quot;]" DisplayName="Cancel schtasks" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_13" />
                                                                 <FlowStep.Next>
-                                                                  <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_18">
-                                                                    <ui:WindowScope SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" ApplicationWindow="[selectNotepad]" DisplayName="focus 'ActivityP Notepad'" sap2010:WorkflowViewState.IdRef="WindowScope_11" InformativeScreenshot="cf4279bb9c78fc758d5b00fc5cf6e7be" Selector="&lt;wnd app='notepad.exe' cls='Notepad' title='activityProgressedDuration.record - Notepad' /&gt;">
-                                                                      <ui:WindowScope.Body>
-                                                                        <ActivityAction x:TypeArguments="x:Object">
-                                                                          <ActivityAction.Argument>
-                                                                            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                                                          </ActivityAction.Argument>
-                                                                          <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_48">
-                                                                            <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'notepad.exe activityPro...'" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
-                                                                              <ui:Click.CursorPosition>
-                                                                                <ui:CursorPosition OffsetX="471" OffsetY="22" Position="TopLeft" />
-                                                                              </ui:Click.CursorPosition>
-                                                                              <ui:Click.Target>
-                                                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="aa5e93f72c3cd2ec519ff4c7b33cc003" WaitForReady="INTERACTIVE" />
-                                                                              </ui:Click.Target>
-                                                                            </ui:Click>
-                                                                          </Sequence>
-                                                                        </ActivityAction>
-                                                                      </ui:WindowScope.Body>
-                                                                    </ui:WindowScope>
+                                                                  <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_16">
+                                                                    <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="C:\uiPath\var\activityProgressedDuration.record" DisplayName="Notepad: Duration.record" FileName="notepad.exe" sap2010:WorkflowViewState.IdRef="StartProcess_9" />
                                                                     <FlowStep.Next>
-                                                                      <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_20">
-                                                                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message box" sap2010:WorkflowViewState.IdRef="MessageBox_14" Text="!!! Warning !!! Please check the progressed duration, if any duplicated data, remove corresponding lines and save." TopMost="True" />
+                                                                      <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_18">
+                                                                        <ui:WindowScope SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" ApplicationWindow="[selectNotepad]" DisplayName="focus 'ActivityP Notepad'" sap2010:WorkflowViewState.IdRef="WindowScope_11" InformativeScreenshot="cf4279bb9c78fc758d5b00fc5cf6e7be" Selector="&lt;wnd app='notepad.exe' cls='Notepad' title='activityProgressedDuration.record - Notepad' /&gt;">
+                                                                          <ui:WindowScope.Body>
+                                                                            <ActivityAction x:TypeArguments="x:Object">
+                                                                              <ActivityAction.Argument>
+                                                                                <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                                              </ActivityAction.Argument>
+                                                                              <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_48">
+                                                                                <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'notepad.exe activityPro...'" sap2010:WorkflowViewState.IdRef="Click_13" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="False" SimulateClick="False">
+                                                                                  <ui:Click.CursorPosition>
+                                                                                    <ui:CursorPosition OffsetX="471" OffsetY="22" Position="TopLeft" />
+                                                                                  </ui:Click.CursorPosition>
+                                                                                  <ui:Click.Target>
+                                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="aa5e93f72c3cd2ec519ff4c7b33cc003" WaitForReady="INTERACTIVE" />
+                                                                                  </ui:Click.Target>
+                                                                                </ui:Click>
+                                                                              </Sequence>
+                                                                            </ActivityAction>
+                                                                          </ui:WindowScope.Body>
+                                                                        </ui:WindowScope>
                                                                         <FlowStep.Next>
-                                                                          <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_19">
-                                                                            <ui:MaximizeWindow DisplayName="Maximize window" sap2010:WorkflowViewState.IdRef="MaximizeWindow_3" Window="[selectNotepad]" />
+                                                                          <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_20">
+                                                                            <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message box" sap2010:WorkflowViewState.IdRef="MessageBox_14" Text="!!! Warning !!! Please check the progressed duration, if any duplicated data, remove corresponding lines and save." TopMost="True" />
+                                                                            <FlowStep.Next>
+                                                                              <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_19">
+                                                                                <ui:MaximizeWindow DisplayName="Maximize window" sap2010:WorkflowViewState.IdRef="MaximizeWindow_3" Window="[selectNotepad]" />
+                                                                              </FlowStep>
+                                                                            </FlowStep.Next>
                                                                           </FlowStep>
                                                                         </FlowStep.Next>
                                                                       </FlowStep>
@@ -723,7 +728,8 @@
     <x:Reference>__ReferenceID15</x:Reference>
     <x:Reference>__ReferenceID16</x:Reference>
     <x:Reference>__ReferenceID17</x:Reference>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <x:Reference>__ReferenceID18</x:Reference>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -1031,7 +1037,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_37" sap:VirtualizedContainerService.HintSize="496,2276">
+      <sap2010:ViewStateData Id="Sequence_37" sap:VirtualizedContainerService.HintSize="496,2236">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1196,7 +1202,7 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteLine_2" sap:VirtualizedContainerService.HintSize="211,61" />
-      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="572,1462">
+      <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1303,6 +1309,13 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="StartProcess_13" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="StartProcess_9" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -1336,7 +1349,7 @@
       <sap2010:ViewStateData Id="FlowStep_19">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,1329</av:Point>
+            <av:Point x:Key="ShapeLocation">810,159</av:Point>
             <av:Size x:Key="ShapeSize">200,22</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
@@ -1344,169 +1357,178 @@
       <sap2010:ViewStateData Id="FlowStep_20">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,1244.5</av:Point>
+            <av:Point x:Key="ShapeLocation">810,74</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,1295.5 290,1329</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">910,126 910,159</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_18">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,1144.5</av:Point>
+            <av:Point x:Key="ShapeLocation">440,614</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,1195.5 290,1244.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">640,639.5 735.5,639.5 735.5,99.5 810,99.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_16">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,1064.5</av:Point>
+            <av:Point x:Key="ShapeLocation">440,534</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,1115.5 290,1144.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,585 540,614</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_23">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">440,464.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">540,515.5 540,534</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_14">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,991</av:Point>
+            <av:Point x:Key="ShapeLocation">440,394</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,1042 290,1064.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,445 540,464.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_9">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,939</av:Point>
+            <av:Point x:Key="ShapeLocation">440,349</av:Point>
             <av:Size x:Key="ShapeSize">200,22</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,961 290,991</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,371 540,394</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,864.5</av:Point>
+            <av:Point x:Key="ShapeLocation">440,284</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,915.5 290,939</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,335 540,349</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_10">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,784.5</av:Point>
+            <av:Point x:Key="ShapeLocation">440,214</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,835.5 290,864.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,265 540,284</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,704.02</av:Point>
+            <av:Point x:Key="ShapeLocation">440,144</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,755.02 290,784.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,195 540,214</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_11">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,624.5</av:Point>
+            <av:Point x:Key="ShapeLocation">440,84</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,675.5 290,704.02</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">540,135 540,144</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_12">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,554.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,554.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,605.5 290,624.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,606.5 140,620 349.22813430815,620 349.22813430815,110 440,110</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_7">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,496.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,506.5</av:Point>
             <av:Size x:Key="ShapeSize">200,22</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,518.5 290,554.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,528.5 140,554.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_6">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,425.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,425.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,476.5 290,496.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,476.5 140,506.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,379</av:Point>
+            <av:Point x:Key="ShapeLocation">40,379</av:Point>
             <av:Size x:Key="ShapeSize">200,22</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,401 290,425.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,401 140,425.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_21">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,305.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,305.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,356.5 290,379</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,357.5 140,379</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_3">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,234.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,234.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,285.5 290,305.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,286.5 140,305.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_4">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,164.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,164.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,215.5 290,234.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,216.5 140,234.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_5">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,94.5</av:Point>
+            <av:Point x:Key="ShapeLocation">40,94.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,145.5 290,164.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">140,145.5 140,164.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="688,1426">
+      <sap2010:ViewStateData Id="Flowchart_1" sap:VirtualizedContainerService.HintSize="1147,726">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <av:Point x:Key="ShapeLocation">260,0</av:Point>
+            <av:Point x:Key="ShapeLocation">110,0</av:Point>
             <av:Size x:Key="ShapeSize">60,75</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,75 290,94.5</av:PointCollection>
-            <x:Double x:Key="Height">1389.6228287841195</x:Double>
-            <x:Double x:Key="Width">674</x:Double>
+            <av:PointCollection x:Key="ConnectorLocation">140,75 140,94.5</av:PointCollection>
+            <x:Double x:Key="Height">690</x:Double>
+            <x:Double x:Key="Width">1133.4504467912266</x:Double>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="pauseInProgressedActivity_1" sap:VirtualizedContainerService.HintSize="728,1546" />
+      <sap2010:ViewStateData Id="pauseInProgressedActivity_1" sap:VirtualizedContainerService.HintSize="1187,846" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

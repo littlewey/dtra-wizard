@@ -1,0 +1,1 @@
+%LOCALAPPDATA%\UiPath\app-2017.1.6309.33850\UiStudio.exe

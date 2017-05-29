@@ -130,7 +130,7 @@ print str(datetime.now()) + " leftDuration:  \n" + str(leftDuration) + "\n"
 
 # in case leftDuration.total_seconds() <= 420
 
-completeTime = datetime.now() + (optimizedDuration if leftDuration.total_seconds() > 420 else timedelta(minutes=7))
+completeTime = datetime.now() + (leftDuration if leftDuration.total_seconds() > 420 else timedelta(minutes=7))
 
 completeTimeString = completeTime.strftime(timeFormat)
 

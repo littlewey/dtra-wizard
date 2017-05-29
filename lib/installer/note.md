@@ -25,3 +25,5 @@ schtasks /QUERY /TN toCompleteDTRA /XML | findstr  ":"
 
 # delete task
 schtasks.exe /Delete /TN toCompleteDTRA /F
+
+"/C echo [%DATE%_%TIME%  schtasks-cancel] >> C:\uiPath\var\log\schtasks.log & " + "schtasks.exe /Delete /TN toCompleteDTRA /F" + " >> C:\uiPath\var\log\schtasks.log & schtasks /QUERY /TN toCompleteDTRA /XML | findstr  : >> C:\uiPath\var\log\schtasks.log"

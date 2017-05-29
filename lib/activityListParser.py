@@ -23,6 +23,12 @@ sourceTimeFormatActul = '%m/%d/%Y %I:%M %p'
 sourceTimeFormatDueDate = '%m/%d/%Y %I:%M:%S %p'
 timeFormat = '%m/%d/%Y-%H:%M'
 
+ignoredActivityIdPath = r'C:\uiPath\var\ignoredActivityId.list'
+with open(ignoredActivityIdPath) as ignoredActivityIdFile:
+    ignoredActivityId = ignoredActivityIdFile.read()
+
+if ignoredActivityId != "NA":
+    ignoredActivityIdList = ignoredActivityId.split()
 
 with open(activityListFilePath) as activityListFile:
     activityListUrgly = activityListFile.read()
@@ -64,11 +70,11 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
 
     # handling state
 
-    if itemStatus == "Pau":
+    if itemStatus == "Pau" and itemActivityID not in ignoredActivityIdList:
         pausedActivity = pausedActivity + itemActivityID + '\n'
     if itemStatus == "InP":
         inProgressActivity = "" + itemActivityID
-    if itemStatus == "Dis":
+    if itemStatus == "Dis" and itemActivityID not in ignoredActivityIdList:
         dispatchedActivity = dispatchedActivity + itemActivityID + '\n'
 
     # for myActivityList

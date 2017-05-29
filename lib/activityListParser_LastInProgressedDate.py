@@ -19,6 +19,7 @@ dispatchedActivityPath = r'C:\uiPath\var\dispatchedActivity.list'
 
 myActivityListPath = r'C:\uiPath\myActivityList.txt'
 
+ignoredActivityIdPath = r'C:\uiPath\var\ignoredActivityId.list'
 
 focusingLastStartDateViewPath = r'C:\uiPath\var\focusingLastStartDateView.var'
 
@@ -31,6 +32,13 @@ with open(activityListFilePath) as activityListFile:
     activityListUrgly = activityListFile.read()
 
 parsedActivityTable = str()
+
+with open(ignoredActivityIdPath) as ignoredActivityIdFile:
+    ignoredActivityId = ignoredActivityIdFile.read()
+
+if ignoredActivityId != "NA":
+    ignoredActivityIdList = ignoredActivityId.split()
+
 
 # init state variable
 
@@ -68,7 +76,7 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
 
     # handling state
 
-    if itemStatus == "Pau":
+    if itemStatus == "Pau" and itemActivityID not in ignoredActivityIdList :
         pausedActivity = pausedActivity + itemActivityID + '\n'
     if itemStatus == "InP":
         inProgressActivity = "" + itemActivityID

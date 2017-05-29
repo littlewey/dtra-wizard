@@ -11,8 +11,6 @@ print "#################################"
 activityIdToStart = str()
 dispatchedActivityList = list()
 
-
-
 preferredActivityIdPath = r'C:\uiPath\var\preferredActivityId.list'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 

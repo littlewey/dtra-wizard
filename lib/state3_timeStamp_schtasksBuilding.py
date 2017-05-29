@@ -14,7 +14,7 @@ schtasksPrefixPath = r'C:\uiPath\lib\schtasksPrefix.line'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 completeScheduleRatePath = r'C:\uiPath\var\completeScheduleRate.var'
 schtasksCommandState3Path = r'C:\uiPath\var\schtasksCommandState3.var'
-lastStartActivityDatePath = r'C:\uiPath\var\lastStartActivityDate.var'
+lastStartActivityDatePath = r'C:\uiPath\var\lastStartActivityDate.record'
 
 with open(activityIdStartedPath) as activityIdStartedFile:
     activityIdStarted = activityIdStartedFile.read()

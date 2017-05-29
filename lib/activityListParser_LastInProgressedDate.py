@@ -5,9 +5,9 @@ from datetime import date
 from datetime import datetime 
 from datetime import timedelta 
 
-print "##########################################"
-print "# 2nd try to Parse the activities listed #"
-print "##########################################"
+print "####################################################################################"
+print "# Parse the activities listed on lastInProgressedDate for only Paused & inProgress #"
+print "####################################################################################"
 
 activityListFilePath = r'C:\uiPath\var\activityListValueOriginal.var'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
@@ -18,6 +18,9 @@ dispatchedActivityPath = r'C:\uiPath\var\dispatchedActivity.list'
 
 
 myActivityListPath = r'C:\uiPath\myActivityList.txt'
+
+
+focusingLastStartDateViewPath = r'C:\uiPath\var\focusingLastStartDateView.var'
 
 sourceTimeFormatActul = '%m/%d/%Y %I:%M %p'
 sourceTimeFormatDueDate = '%m/%d/%Y %I:%M:%S %p'
@@ -36,11 +39,12 @@ inProgressActivity = str()
 dispatchedActivity = str()
 
 myActivityList = str()
-
+focusingLastStartDateView = "0"
 
 #parsedActivityTable = "ProjectName\tWorkPackage\tActivityID\tNumber\tStatus\tAssignment_Start\tAssignment_Finish\tDueDate\tDuration\n"
 
-myActivityList = "ActivityID           \tSta\tActivityName\n"
+# append only here
+# myActivityList = "ActivityID           \tSta\tActivityName\n"
 
 for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData')[1:]:
     activityList = activityItem.split('\n')
@@ -68,38 +72,70 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
         pausedActivity = pausedActivity + itemActivityID + '\n'
     if itemStatus == "InP":
         inProgressActivity = "" + itemActivityID
-    if itemStatus == "Dis":
-        dispatchedActivity = dispatchedActivity + itemActivityID + '\n'
+    #if itemStatus == "Dis":
+    #    dispatchedActivity = dispatchedActivity + itemActivityID + '\n'
 
     # for myActivityList
     myActivityListForAppending = [itemActivityID, itemStatus, itemActivityName]
     if itemStatus != "Com":
         myActivityList = myActivityList + '\t'.join(myActivityListForAppending) + '\n'
 
-#with open(activityListFileBeautifiedPath,'w') as outputFile:
-#    outputFile.write(parsedActivityTable)
+with open(activityListFileBeautifiedPath,'a') as outputFile:
+    outputFile.write(parsedActivityTable)
 
 # log
-#print str(datetime.now()) + " parsedActivityTable : \n" + parsedActivityTable + "\n"
+print str(datetime.now()) + "append parsedActivityTable : \n" + parsedActivityTable + "\n"
 
 
-if pausedActivity != "":
-    with open(pausedActivityPath,'a') as pausedActivityFile:
-        pausedActivityFile.write(pausedActivity)
-    else:
-        pausedActivity = "NA"
-# log
-print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
-
-
+print "########################"
+print "# inProgressed recheck #"
+print "########################"
 if inProgressActivity == "":
     inProgressActivity = "NA"
+    focusingLastStartDateView = "0"
+else:
+    focusingLastStartDateView = "1"
 
 with open(inProgressActivityPath,'w') as inProgressActivityFile:
     inProgressActivityFile.write(inProgressActivity)
 # log
 print str(datetime.now()) + " inProgressActivity : \n" + inProgressActivity + "\n"
+print str(datetime.now()) + " focusingLastStartDateView : \n" + focusingLastStartDateView + "\n"
 
+
+print "##################"
+print "# paused recheck #"
+print "##################"
+
+with open(pausedActivityPath) as pausedActivityFile:
+    pausedActivity_startWeek = pausedActivityFile.read()
+
+
+pasuedAct_writeMode = 'w' if pausedActivity_startWeek == "NA" else 'a'
+
+# log
+print str(datetime.now()) + " pausedActivity_startWeek : \n" + pausedActivity_startWeek + "\n"
+print str(datetime.now()) + " pasuedAct_writeMode : \n" + pasuedAct_writeMode + "\n"
+
+
+if pausedActivity != "":
+    focusingLastStartDateView = "1"
+    with open(pausedActivityPath, pasuedAct_writeMode) as pausedActivityFile:
+        pausedActivityFile.write(pausedActivity)
+else:
+    pausedActivity = "NA"
+# log
+print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
+print str(datetime.now()) + " focusingLastStartDateView : \n" + focusingLastStartDateView + "\n"
+
+
+print "###################################"
+print "# Write focusingLastStartDateView #"
+print "###################################"
+
+
+with open(focusingLastStartDateViewPath,'w') as focusingLastStartDateViewFile:
+    focusingLastStartDateViewFile.write(focusingLastStartDateView)
 
 #if dispatchedActivity == "":
 #    dispatchedActivity = "NA"
@@ -107,11 +143,14 @@ print str(datetime.now()) + " inProgressActivity : \n" + inProgressActivity + "\
 #with open(dispatchedActivityPath,'w') as dispatchedActivityFile:
 #    dispatchedActivityFile.write(dispatchedActivity)
 # log
-print str(datetime.now()) + " dispatchedActivity : \n" + dispatchedActivity + "\n"
+# print str(datetime.now()) + " dispatchedActivity : \n" + dispatchedActivity + "\n"
 
 # [debug]
 # print myActivityList
-with open(myActivityListPath,'w') as myActivityListOutputFile:
+
+
+# append only
+with open(myActivityListPath,'a') as myActivityListOutputFile:
     myActivityListOutputFile.write(myActivityList)
 
 # log

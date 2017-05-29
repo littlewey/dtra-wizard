@@ -82,12 +82,12 @@ with open(activityListFileBeautifiedPath,'w') as outputFile:
 # log
 print str(datetime.now()) + " parsedActivityTable : \n" + parsedActivityTable + "\n"
 
-
 if pausedActivity == "":
     pausedActivity = "NA"
 
 with open(pausedActivityPath,'w') as pausedActivityFile:
     pausedActivityFile.write(pausedActivity)
+
 # log
 print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
 

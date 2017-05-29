@@ -70,9 +70,12 @@
       <Variable x:TypeArguments="x:String" Name="lastStartActivityDate" />
       <Variable x:TypeArguments="x:String" Name="startDate" />
       <Variable x:TypeArguments="ui:Window" Name="selectNotepad" />
+      <Variable x:TypeArguments="x:String" Name="lastStartActDateRecord_ifExists" />
+      <Variable x:TypeArguments="x:String" Name="focusingLastStartDateView" />
+      <Variable x:TypeArguments="x:String" Name="lastStartActDate" />
     </Flowchart.Variables>
     <Flowchart.StartNode>
-      <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_5">
+      <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_5">
         <Sequence DisplayName="initialization" sap2010:WorkflowViewState.IdRef="Sequence_10">
           <Sequence.Variables>
             <Variable x:TypeArguments="x:String" Name="preferredActivityIdListString" />
@@ -178,7 +181,7 @@
           </ui:OpenBrowser>
         </Sequence>
         <FlowStep.Next>
-          <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_4">
+          <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_4">
             <Sequence DisplayName="Scrap activity List" sap2010:WorkflowViewState.IdRef="Sequence_16">
               <Sequence DisplayName="sort activity list" sap2010:WorkflowViewState.IdRef="Sequence_15">
                 <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_2" InformativeScreenshot="0996a6c999010ce1bcf082af983a8a9c" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
@@ -235,216 +238,261 @@
               <ui:WriteTextFile DisplayName="Write raw activityListRAW" FileName="C:\uiPath\var\activityListValueOriginal.var" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[activityListRAW]" />
             </Sequence>
             <FlowStep.Next>
-              <FlowStep x:Name="__ReferenceID3" sap2010:WorkflowViewState.IdRef="FlowStep_3">
+              <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_3">
                 <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% activityListParser.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\activityListParser.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python Parse act-list" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_3" />
                 <FlowStep.Next>
-                  <FlowStep x:Name="__ReferenceID2" sap2010:WorkflowViewState.IdRef="FlowStep_2">
-                    <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_7" />
+                  <FlowStep x:Name="__ReferenceID16" sap2010:WorkflowViewState.IdRef="FlowStep_21">
+                    <Sequence DisplayName="if inProgress = NA reCheck LastStartDateView" sap2010:WorkflowViewState.IdRef="Sequence_52">
+                      <Delay Duration="00:00:03" sap2010:WorkflowViewState.IdRef="Delay_18" />
+                      <ui:ReadTextFile Content="[inProgressedActivity]" DisplayName="Read text file" FileName="C:\uiPath\var\inProgressActivity.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_8" />
+                      <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% lastStartActDateRecord_ifExists_checker.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\lastStartActDateRecord_ifExists_checker.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python lastStartActDateRecord_ifExists_checker" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_10" />
+                      <Delay Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_19" />
+                      <If Condition="[inProgressedActivity = &quot;NA&quot;]" sap2010:WorkflowViewState.IdRef="If_5">
+                        <If.Then>
+                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_51">
+                            <Sequence DisplayName="reCheck LastStartDateView" sap2010:WorkflowViewState.IdRef="Sequence_50">
+                              <ui:WriteTextFile DisplayName="init focusingLastStartDateView as 0" FileName="C:\uiPath\var\focusingLastStartDateView.var" sap2010:WorkflowViewState.IdRef="WriteTextFile_5" Text="0" />
+                              <ui:ReadTextFile Content="[focusingLastStartDateView]" DisplayName="Read text file" FileName="C:\uiPath\var\lastStartActDateRecord_ifExists.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_9" />
+                              <Delay Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_20" />
+                              <ui:WriteTextFile DisplayName="Write text file" FileName="C:\uiPath\var\focusingLastStartDateView.var" sap2010:WorkflowViewState.IdRef="WriteTextFile_6" Text="0" />
+                              <If Condition="[focusingLastStartDateView = &quot;True&quot;]" DisplayName="If lastStartActDateRecord exists, change dateview and scrap InProgressed&amp; paused data" sap2010:WorkflowViewState.IdRef="If_3">
+                                <If.Then>
+                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_49">
+                                    <ui:ReadTextFile Content="[lastStartActDate]" DisplayName="Read lastStartDate" FileName="C:\uiPath\var\lastStartActivityDate.record" sap2010:WorkflowViewState.IdRef="ReadTextFile_10" />
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow : switchDateView" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="switchDateView.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InArgument x:TypeArguments="x:String" x:Key="viewDate">[lastStartActDate]</InArgument>
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                    <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow : scrapingActivityList" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="scrapingActivityList.xaml">
+                                      <ui:InvokeWorkflowFile.Arguments>
+                                        <InOutArgument x:TypeArguments="ui:GenericValue" x:Key="activityListRAW" />
+                                      </ui:InvokeWorkflowFile.Arguments>
+                                    </ui:InvokeWorkflowFile>
+                                    <Delay Duration="00:00:01" sap2010:WorkflowViewState.IdRef="Delay_21" />
+                                    <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% activityListParser_LastInProgressedDate.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\activityListParser_LastInProgressedDate.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Parse: activityListParser_LastInProgressedDate" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_11" />
+                                    <Delay Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_22" />
+                                  </Sequence>
+                                </If.Then>
+                                <If.Else>
+                                  <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[&quot;Skip as focusingLastStartDateView = &quot; + focusingLastStartDateView]" />
+                                </If.Else>
+                              </If>
+                            </Sequence>
+                            <ui:ReadTextFile Content="[focusingLastStartDateView]" DisplayName="Read focusingLastStartDateView.var" FileName="C:\uiPath\var\focusingLastStartDateView.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_11" />
+                            <If Condition="[focusingLastStartDateView = &quot;0&quot;]" sap2010:WorkflowViewState.IdRef="If_4">
+                              <If.Then>
+                                <ui:InvokeWorkflowFile ContinueOnError="{x:Null}" DisplayName="Invoke workflow file" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="switchDateView.xaml">
+                                  <ui:InvokeWorkflowFile.Arguments>
+                                    <InArgument x:TypeArguments="x:String" x:Key="viewDate">[startDate]</InArgument>
+                                  </ui:InvokeWorkflowFile.Arguments>
+                                </ui:InvokeWorkflowFile>
+                              </If.Then>
+                              <If.Else>
+                                <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[&quot;no need to switch back dateview focusingLastStartDateView = &quot; + focusingLastStartDateView]" />
+                              </If.Else>
+                            </If>
+                          </Sequence>
+                        </If.Then>
+                        <If.Else>
+                          <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="[&quot;skip reCheck LastStartDateView inProgressedActivity= &quot;+ inProgressedActivity]" />
+                        </If.Else>
+                      </If>
+                    </Sequence>
                     <FlowStep.Next>
-                      <FlowStep x:Name="__ReferenceID0" sap2010:WorkflowViewState.IdRef="FlowStep_1">
-                        <Sequence DisplayName="Read beautified activityList" sap2010:WorkflowViewState.IdRef="Sequence_18">
-                          <Sequence.Variables>
-                            <Variable x:TypeArguments="x:String" Name="activityListForGeneratingDataTable" />
-                          </Sequence.Variables>
-                          <ui:ReadTextFile Content="[activityListForGeneratingDataTable]" DisplayName="Read beautified activityList" FileName="C:\uiPath\var\activityListValueBeautified.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_3" />
-                          <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" DataTable="[activityListDataTable]" DisplayName="Generate data table:activityListDataTable" sap2010:WorkflowViewState.IdRef="GenerateDataTable_1" Input="[activityListForGeneratingDataTable]" />
-                          <ui:OutputDataTable DataTable="[activityListDataTable]" DisplayName="[DEBUG]: Output data table" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[outputActivityList]" />
-                          <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_6">
-                            <ui:CommentOut.Body>
-                              <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_17">
-                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="DEBUG: Message box" sap2010:WorkflowViewState.IdRef="MessageBox_6" Text="[outputActivityList]" TopMost="True" />
-                              </Sequence>
-                            </ui:CommentOut.Body>
-                          </ui:CommentOut>
-                          <ui:WriteTextFile DisplayName="LOG: Write datatable to text file" FileName="C:\uiPath\var\log\DEBUG_Datatable_As_String.log" sap2010:WorkflowViewState.IdRef="WriteTextFile_2" Text="[outputActivityList]" />
-                        </Sequence>
+                      <FlowStep x:Name="__ReferenceID1" sap2010:WorkflowViewState.IdRef="FlowStep_2">
+                        <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_7" />
                         <FlowStep.Next>
-                          <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_6">
+                          <FlowStep x:Name="__ReferenceID4" sap2010:WorkflowViewState.IdRef="FlowStep_6">
                             <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% toPauseInProgressed.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\toPauseInProgressed.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python log toPauseInProgressed" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_4" />
                             <FlowStep.Next>
-                              <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_7">
+                              <FlowStep x:Name="__ReferenceID5" sap2010:WorkflowViewState.IdRef="FlowStep_7">
                                 <Delay Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_8" />
                                 <FlowStep.Next>
-                                  <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_12">
+                                  <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_12">
                                     <ui:ReadTextFile Content="[inProgressedActivity]" DisplayName="Read inProgressedActivity" FileName="C:\uiPath\var\inProgressActivity.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_5" />
                                     <FlowStep.Next>
-                                      <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_13">
-                                        <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="[debug]: inProgressedActivity" sap2010:WorkflowViewState.IdRef="MessageBox_13" Text="current week view doesnt include inProgressed Activity. Will go to last recorded start time to check" TopMost="True" />
-                                        <FlowStep.Next>
-                                          <FlowStep x:Name="__ReferenceID10" sap2010:WorkflowViewState.IdRef="FlowStep_11">
-                                            <If Condition="[inProgressedActivity = &quot;NA&quot;]" DisplayName="if inProgressed week not shown" sap2010:WorkflowViewState.IdRef="If_2">
-                                              <If.Then>
-                                                <Sequence sap2010:WorkflowViewState.IdRef="Sequence_31">
-                                                  <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Close window" sap2010:WorkflowViewState.IdRef="CloseWindow_1" UseWindow="[IE_Window]" WaitForReady="INTERACTIVE" />
-                                                  <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="go to last start activity week view" />
-                                                  <ui:ReadTextFile Content="[lastStartActivityDate]" DisplayName="Read text file" FileName="C:\uiPath\var\lastStartActivityDate.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_6" />
-                                                  <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
-                                                    <Assign.To>
-                                                      <OutArgument x:TypeArguments="x:String">[startDate]</OutArgument>
-                                                    </Assign.To>
-                                                    <Assign.Value>
-                                                      <InArgument x:TypeArguments="x:String">[lastStartActivityDate]</InArgument>
-                                                    </Assign.Value>
-                                                  </Assign>
-                                                  <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open https://***REMOVED***/ClickScheduleWebClient/Default.aspx" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" NewSession="True" Private="False" Url="https://***REMOVED***/ClickScheduleWebClient/Default.aspx">
-                                                    <ui:OpenBrowser.Body>
+                                      <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_11">
+                                        <If Condition="[inProgressedActivity = &quot;NA&quot;]" DisplayName="if inProgressed week not shown" sap2010:WorkflowViewState.IdRef="If_2">
+                                          <If.Then>
+                                            <Sequence sap2010:WorkflowViewState.IdRef="Sequence_31">
+                                              <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Close window" sap2010:WorkflowViewState.IdRef="CloseWindow_1" UseWindow="[IE_Window]" WaitForReady="INTERACTIVE" />
+                                              <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="go to last start activity week view" />
+                                              <ui:ReadTextFile Content="[lastStartActivityDate]" DisplayName="Read text file" FileName="C:\uiPath\var\lastStartActivityDate.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_6" />
+                                              <Assign sap2010:WorkflowViewState.IdRef="Assign_4">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:String">[startDate]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:String">[lastStartActivityDate]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                              <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open https://***REMOVED***/ClickScheduleWebClient/Default.aspx" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" NewSession="True" Private="False" Url="https://***REMOVED***/ClickScheduleWebClient/Default.aspx">
+                                                <ui:OpenBrowser.Body>
+                                                  <ActivityAction x:TypeArguments="x:Object">
+                                                    <ActivityAction.Argument>
+                                                      <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                    </ActivityAction.Argument>
+                                                    <Sequence sap2010:WorkflowViewState.IdRef="Sequence_37">
+                                                      <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" ContinueOnError="True" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="d" KeyModifiers="Win" SendWindowMessages="False" SpecialKey="False">
+                                                        <ui:SendHotkey.Target>
+                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
+                                                        </ui:SendHotkey.Target>
+                                                      </ui:SendHotkey>
+                                                      <Sequence sap2010:WorkflowViewState.IdRef="Sequence_36">
+                                                        <ui:WindowScope SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" ApplicationWindow="[IE_Window]" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_7" InformativeScreenshot="ee1d6fa73fa88790c4312d33a9dfbe15" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
+                                                          <ui:WindowScope.Body>
+                                                            <ActivityAction x:TypeArguments="x:Object">
+                                                              <ActivityAction.Argument>
+                                                                <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                              </ActivityAction.Argument>
+                                                              <Sequence sap2010:WorkflowViewState.IdRef="Sequence_35">
+                                                                <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_14">
+                                                                  <ui:CommentOut.Body>
+                                                                    <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_32">
+                                                                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="DEBUG:Message box" sap2010:WorkflowViewState.IdRef="MessageBox_10" Text="[&quot;Please Confirm Start date is &quot;+ startDate + &quot; Click OK when whole page was loaded&quot;]" TopMost="True" />
+                                                                    </Sequence>
+                                                                  </ui:CommentOut.Body>
+                                                                </ui:CommentOut>
+                                                                <ui:ShowWindow DisplayName="Show window" sap2010:WorkflowViewState.IdRef="ShowWindow_2" Window="[IE_Window]" />
+                                                                <ui:MaximizeWindow DisplayName="Maximize window" sap2010:WorkflowViewState.IdRef="MaximizeWindow_2" Window="[IE_Window]" />
+                                                                <ui:RestoreWindow DisplayName="Restore window" sap2010:WorkflowViewState.IdRef="RestoreWindow_2" Window="[IE_Window]" />
+                                                                <Delay Duration="00:00:10" sap2010:WorkflowViewState.IdRef="Delay_12" />
+                                                                <ui:WaitUiElementAppear FoundElement="{x:Null}" DisplayName="Find Element 'text  From:' (wait visable)" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_4" WaitActive="False" WaitVisible="True">
+                                                                  <ui:WaitUiElementAppear.Target>
+                                                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6d13193ac8cfae6c5a9ab039891ecd6a" Selector="&lt;wnd aaname='Silverlight Control' cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl automationid='LeftContainer' /&gt;&lt;ctrl automationid='LeftPane' /&gt;&lt;ctrl automationid='fromDate' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                  </ui:WaitUiElementAppear.Target>
+                                                                </ui:WaitUiElementAppear>
+                                                                <Delay Duration="00:00:03" sap2010:WorkflowViewState.IdRef="Delay_13" />
+                                                                <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_15">
+                                                                  <ui:CommentOut.Body>
+                                                                    <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                                                                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="[debug]Message box" sap2010:WorkflowViewState.IdRef="MessageBox_11" Text="[startDate]" TopMost="True" />
+                                                                    </Sequence>
+                                                                  </ui:CommentOut.Body>
+                                                                </ui:CommentOut>
+                                                                <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                                                                  <ui:AnchorBase AnchorPosition="Bottom" sap2010:WorkflowViewState.IdRef="AnchorBase_2">
+                                                                    <ui:AnchorBase.Action>
+                                                                      <ActivityAction x:TypeArguments="ui:Anchor">
+                                                                        <ActivityAction.Argument>
+                                                                          <DelegateInArgument x:TypeArguments="ui:Anchor" Name="ContextAnchor" />
+                                                                        </ActivityAction.Argument>
+                                                                        <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Action Type into 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_4" SendWindowMessages="True" SimulateType="False" Text="[startDate]">
+                                                                          <ui:TypeInto.Target>
+                                                                            <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4848b45837f1a71def2653a5147ca41" Selector="&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
+                                                                          </ui:TypeInto.Target>
+                                                                        </ui:TypeInto>
+                                                                      </ActivityAction>
+                                                                    </ui:AnchorBase.Action>
+                                                                    <ui:AnchorBase.AnchorProvider>
+                                                                      <ui:WaitUiElementAppear FoundElement="{x:Null}" DisplayName="Anchor Find Element 'page tab list  Group1'" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_5" WaitActive="False" WaitVisible="True">
+                                                                        <ui:WaitUiElementAppear.Target>
+                                                                          <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="aa4638e4c06490d61882c41126915571" Selector="&lt;wnd cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl automationid='LeftContainer' /&gt;&lt;ctrl automationid='Group1' /&gt;" WaitForReady="NONE" />
+                                                                        </ui:WaitUiElementAppear.Target>
+                                                                      </ui:WaitUiElementAppear>
+                                                                    </ui:AnchorBase.AnchorProvider>
+                                                                  </ui:AnchorBase>
+                                                                </Sequence>
+                                                              </Sequence>
+                                                            </ActivityAction>
+                                                          </ui:WindowScope.Body>
+                                                        </ui:WindowScope>
+                                                      </Sequence>
+                                                    </Sequence>
+                                                  </ActivityAction>
+                                                </ui:OpenBrowser.Body>
+                                              </ui:OpenBrowser>
+                                              <Sequence DisplayName="Scrap activity List" sap2010:WorkflowViewState.IdRef="Sequence_42">
+                                                <Sequence DisplayName="sort activity list" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                                                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_8" InformativeScreenshot="0996a6c999010ce1bcf082af983a8a9c" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
+                                                    <ui:WindowScope.Body>
                                                       <ActivityAction x:TypeArguments="x:Object">
                                                         <ActivityAction.Argument>
                                                           <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
                                                         </ActivityAction.Argument>
-                                                        <Sequence sap2010:WorkflowViewState.IdRef="Sequence_37">
-                                                          <ui:SendHotkey DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" ContinueOnError="True" DisplayName="Send hotkey" EmptyField="False" sap2010:WorkflowViewState.IdRef="SendHotkey_2" Key="d" KeyModifiers="Win" SendWindowMessages="False" SpecialKey="False">
-                                                            <ui:SendHotkey.Target>
-                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" TimeoutMS="{x:Null}" WaitForReady="INTERACTIVE" />
-                                                            </ui:SendHotkey.Target>
-                                                          </ui:SendHotkey>
-                                                          <Sequence sap2010:WorkflowViewState.IdRef="Sequence_36">
-                                                            <ui:WindowScope SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" ApplicationWindow="[IE_Window]" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_7" InformativeScreenshot="ee1d6fa73fa88790c4312d33a9dfbe15" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
-                                                              <ui:WindowScope.Body>
-                                                                <ActivityAction x:TypeArguments="x:Object">
-                                                                  <ActivityAction.Argument>
-                                                                    <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                                                  </ActivityAction.Argument>
-                                                                  <Sequence sap2010:WorkflowViewState.IdRef="Sequence_35">
-                                                                    <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_14">
-                                                                      <ui:CommentOut.Body>
-                                                                        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_32">
-                                                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="DEBUG:Message box" sap2010:WorkflowViewState.IdRef="MessageBox_10" Text="[&quot;Please Confirm Start date is &quot;+ startDate + &quot; Click OK when whole page was loaded&quot;]" TopMost="True" />
-                                                                        </Sequence>
-                                                                      </ui:CommentOut.Body>
-                                                                    </ui:CommentOut>
-                                                                    <ui:ShowWindow DisplayName="Show window" sap2010:WorkflowViewState.IdRef="ShowWindow_2" Window="[IE_Window]" />
-                                                                    <ui:MaximizeWindow DisplayName="Maximize window" sap2010:WorkflowViewState.IdRef="MaximizeWindow_2" Window="[IE_Window]" />
-                                                                    <ui:RestoreWindow DisplayName="Restore window" sap2010:WorkflowViewState.IdRef="RestoreWindow_2" Window="[IE_Window]" />
-                                                                    <Delay Duration="00:00:10" sap2010:WorkflowViewState.IdRef="Delay_12" />
-                                                                    <ui:WaitUiElementAppear FoundElement="{x:Null}" DisplayName="Find Element 'text  From:' (wait visable)" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_4" WaitActive="False" WaitVisible="True">
-                                                                      <ui:WaitUiElementAppear.Target>
-                                                                        <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="6d13193ac8cfae6c5a9ab039891ecd6a" Selector="&lt;wnd aaname='Silverlight Control' cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl automationid='LeftContainer' /&gt;&lt;ctrl automationid='LeftPane' /&gt;&lt;ctrl automationid='fromDate' /&gt;" WaitForReady="INTERACTIVE" />
-                                                                      </ui:WaitUiElementAppear.Target>
-                                                                    </ui:WaitUiElementAppear>
-                                                                    <Delay Duration="00:00:03" sap2010:WorkflowViewState.IdRef="Delay_13" />
-                                                                    <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_15">
-                                                                      <ui:CommentOut.Body>
-                                                                        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_33">
-                                                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="[debug]Message box" sap2010:WorkflowViewState.IdRef="MessageBox_11" Text="[startDate]" TopMost="True" />
-                                                                        </Sequence>
-                                                                      </ui:CommentOut.Body>
-                                                                    </ui:CommentOut>
-                                                                    <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_34">
-                                                                      <ui:AnchorBase AnchorPosition="Bottom" sap2010:WorkflowViewState.IdRef="AnchorBase_2">
-                                                                        <ui:AnchorBase.Action>
-                                                                          <ActivityAction x:TypeArguments="ui:Anchor">
-                                                                            <ActivityAction.Argument>
-                                                                              <DelegateInArgument x:TypeArguments="ui:Anchor" Name="ContextAnchor" />
-                                                                            </ActivityAction.Argument>
-                                                                            <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Action Type into 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_4" SendWindowMessages="True" SimulateType="False" Text="[startDate]">
-                                                                              <ui:TypeInto.Target>
-                                                                                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4848b45837f1a71def2653a5147ca41" Selector="&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
-                                                                              </ui:TypeInto.Target>
-                                                                            </ui:TypeInto>
-                                                                          </ActivityAction>
-                                                                        </ui:AnchorBase.Action>
-                                                                        <ui:AnchorBase.AnchorProvider>
-                                                                          <ui:WaitUiElementAppear FoundElement="{x:Null}" DisplayName="Anchor Find Element 'page tab list  Group1'" sap2010:WorkflowViewState.IdRef="WaitUiElementAppear_5" WaitActive="False" WaitVisible="True">
-                                                                            <ui:WaitUiElementAppear.Target>
-                                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="aa4638e4c06490d61882c41126915571" Selector="&lt;wnd cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl automationid='LeftContainer' /&gt;&lt;ctrl automationid='Group1' /&gt;" WaitForReady="NONE" />
-                                                                            </ui:WaitUiElementAppear.Target>
-                                                                          </ui:WaitUiElementAppear>
-                                                                        </ui:AnchorBase.AnchorProvider>
-                                                                      </ui:AnchorBase>
-                                                                    </Sequence>
-                                                                  </Sequence>
-                                                                </ActivityAction>
-                                                              </ui:WindowScope.Body>
-                                                            </ui:WindowScope>
-                                                          </Sequence>
+                                                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                                                          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'column header '" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="True" SimulateClick="False">
+                                                            <ui:Click.CursorPosition>
+                                                              <ui:CursorPosition OffsetX="60" OffsetY="9" Position="TopLeft" />
+                                                            </ui:Click.CursorPosition>
+                                                            <ui:Click.Target>
+                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2e6788762783acb1e35cbf0f0b8e1061" Selector="&lt;wnd cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl idx='3' name='Rad Split Container' role='client' /&gt;&lt;ctrl automationid='TaskListContainer' /&gt;&lt;ctrl automationid='TaskListPane' /&gt;&lt;ctrl automationid='tabControlTaskList' /&gt;&lt;ctrl automationid='tab1' /&gt;&lt;ctrl automationid='m_dataGrid' /&gt;&lt;ctrl idx='4' name='views/mainViews/schedulingView/mainAreas/tasksList/workingArea/w*' role='column header' /&gt;" WaitForReady="INTERACTIVE" />
+                                                            </ui:Click.Target>
+                                                          </ui:Click>
+                                                          <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_14" />
+                                                          <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'column header '" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="True" SimulateClick="False">
+                                                            <ui:Click.CursorPosition>
+                                                              <ui:CursorPosition OffsetX="60" OffsetY="9" Position="TopLeft" />
+                                                            </ui:Click.CursorPosition>
+                                                            <ui:Click.Target>
+                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="3cd322c81197fa64bb1c479bb1511d9e" Selector="&lt;wnd cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl idx='3' name='Rad Split Container' role='client' /&gt;&lt;ctrl automationid='TaskListContainer' /&gt;&lt;ctrl automationid='TaskListPane' /&gt;&lt;ctrl automationid='tabControlTaskList' /&gt;&lt;ctrl automationid='tab1' /&gt;&lt;ctrl automationid='m_dataGrid' /&gt;&lt;ctrl idx='8' name='views/mainViews/schedulingView/mainAreas/tasksList/workingArea/w*' role='column header' /&gt;" WaitForReady="INTERACTIVE" />
+                                                            </ui:Click.Target>
+                                                          </ui:Click>
                                                         </Sequence>
                                                       </ActivityAction>
-                                                    </ui:OpenBrowser.Body>
-                                                  </ui:OpenBrowser>
-                                                  <Sequence DisplayName="Scrap activity List" sap2010:WorkflowViewState.IdRef="Sequence_42">
-                                                    <Sequence DisplayName="sort activity list" sap2010:WorkflowViewState.IdRef="Sequence_39">
-                                                      <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_8" InformativeScreenshot="0996a6c999010ce1bcf082af983a8a9c" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
-                                                        <ui:WindowScope.Body>
-                                                          <ActivityAction x:TypeArguments="x:Object">
-                                                            <ActivityAction.Argument>
-                                                              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                                            </ActivityAction.Argument>
-                                                            <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_38">
-                                                              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'column header '" sap2010:WorkflowViewState.IdRef="Click_9" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="True" SimulateClick="False">
-                                                                <ui:Click.CursorPosition>
-                                                                  <ui:CursorPosition OffsetX="60" OffsetY="9" Position="TopLeft" />
-                                                                </ui:Click.CursorPosition>
-                                                                <ui:Click.Target>
-                                                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="2e6788762783acb1e35cbf0f0b8e1061" Selector="&lt;wnd cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl idx='3' name='Rad Split Container' role='client' /&gt;&lt;ctrl automationid='TaskListContainer' /&gt;&lt;ctrl automationid='TaskListPane' /&gt;&lt;ctrl automationid='tabControlTaskList' /&gt;&lt;ctrl automationid='tab1' /&gt;&lt;ctrl automationid='m_dataGrid' /&gt;&lt;ctrl idx='4' name='views/mainViews/schedulingView/mainAreas/tasksList/workingArea/w*' role='column header' /&gt;" WaitForReady="INTERACTIVE" />
-                                                                </ui:Click.Target>
-                                                              </ui:Click>
-                                                              <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_14" />
-                                                              <ui:Click DelayBefore="{x:Null}" DelayMS="{x:Null}" ClickType="CLICK_SINGLE" DisplayName="Click 'column header '" sap2010:WorkflowViewState.IdRef="Click_10" KeyModifiers="None" MouseButton="BTN_LEFT" SendWindowMessages="True" SimulateClick="False">
-                                                                <ui:Click.CursorPosition>
-                                                                  <ui:CursorPosition OffsetX="60" OffsetY="9" Position="TopLeft" />
-                                                                </ui:Click.CursorPosition>
-                                                                <ui:Click.Target>
-                                                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="3cd322c81197fa64bb1c479bb1511d9e" Selector="&lt;wnd cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl idx='3' name='Rad Split Container' role='client' /&gt;&lt;ctrl automationid='TaskListContainer' /&gt;&lt;ctrl automationid='TaskListPane' /&gt;&lt;ctrl automationid='tabControlTaskList' /&gt;&lt;ctrl automationid='tab1' /&gt;&lt;ctrl automationid='m_dataGrid' /&gt;&lt;ctrl idx='8' name='views/mainViews/schedulingView/mainAreas/tasksList/workingArea/w*' role='column header' /&gt;" WaitForReady="INTERACTIVE" />
-                                                                </ui:Click.Target>
-                                                              </ui:Click>
-                                                            </Sequence>
-                                                          </ActivityAction>
-                                                        </ui:WindowScope.Body>
-                                                      </ui:WindowScope>
-                                                      <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_15" />
-                                                    </Sequence>
-                                                    <Sequence DisplayName="data scraping" sap2010:WorkflowViewState.IdRef="Sequence_41">
-                                                      <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_9" InformativeScreenshot="a96b90c8d23cb0b38fad95e2a9967ce7" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
-                                                        <ui:WindowScope.Body>
-                                                          <ActivityAction x:TypeArguments="x:Object">
-                                                            <ActivityAction.Argument>
-                                                              <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
-                                                            </ActivityAction.Argument>
-                                                            <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_40">
-                                                              <ui:GetFullText DisplayName="Get full text 'list  m_dataGrid'" sap2010:WorkflowViewState.IdRef="GetFullText_2" IgnoreHidden="False">
-                                                                <ui:GetFullText.Target>
-                                                                  <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="174359eee1514ce3a661452686133a45" Selector="&lt;wnd aaname='Silverlight Control' cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl idx='3' name='Rad Split Container' role='client' /&gt;&lt;ctrl automationid='TaskListContainer' /&gt;&lt;ctrl automationid='TaskListPane' /&gt;&lt;ctrl automationid='tabControlTaskList' /&gt;&lt;ctrl automationid='tab1' /&gt;&lt;ctrl automationid='m_dataGrid' /&gt;" WaitForReady="INTERACTIVE" />
-                                                                </ui:GetFullText.Target>
-                                                                <ui:GetFullText.Text>
-                                                                  <OutArgument x:TypeArguments="ui:GenericValue">[activityListRAW]</OutArgument>
-                                                                </ui:GetFullText.Text>
-                                                              </ui:GetFullText>
-                                                            </Sequence>
-                                                          </ActivityAction>
-                                                        </ui:WindowScope.Body>
-                                                      </ui:WindowScope>
-                                                    </Sequence>
-                                                    <ui:WriteTextFile DisplayName="Write raw activityListRAW" FileName="C:\uiPath\var\activityListValueOriginal.var" sap2010:WorkflowViewState.IdRef="WriteTextFile_3" Text="[activityListRAW]" />
-                                                  </Sequence>
-                                                  <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% activityListParser.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\activityListParser.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python Parse act-list" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_7" />
-                                                  <Delay Duration="00:00:04" sap2010:WorkflowViewState.IdRef="Delay_16" />
-                                                  <Sequence DisplayName="Read beautified activityList" sap2010:WorkflowViewState.IdRef="Sequence_44">
-                                                    <Sequence.Variables>
-                                                      <Variable x:TypeArguments="x:String" Name="activityListForGeneratingDataTable" />
-                                                    </Sequence.Variables>
-                                                    <ui:ReadTextFile Content="[activityListForGeneratingDataTable]" DisplayName="Read beautified activityList" FileName="C:\uiPath\var\activityListValueBeautified.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_7" />
-                                                    <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" DataTable="[activityListDataTable]" DisplayName="Generate data table:activityListDataTable" sap2010:WorkflowViewState.IdRef="GenerateDataTable_2" Input="[activityListForGeneratingDataTable]" />
-                                                    <ui:OutputDataTable DataTable="[activityListDataTable]" DisplayName="[DEBUG]: Output data table" sap2010:WorkflowViewState.IdRef="OutputDataTable_2" Text="[outputActivityList]" />
-                                                    <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_16">
-                                                      <ui:CommentOut.Body>
-                                                        <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_43">
-                                                          <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="DEBUG: Message box" sap2010:WorkflowViewState.IdRef="MessageBox_12" Text="[outputActivityList]" TopMost="True" />
-                                                        </Sequence>
-                                                      </ui:CommentOut.Body>
-                                                    </ui:CommentOut>
-                                                    <ui:WriteTextFile DisplayName="LOG: Write datatable to text file" FileName="C:\uiPath\var\log\DEBUG_Datatable_As_String.log" sap2010:WorkflowViewState.IdRef="WriteTextFile_4" Text="[outputActivityList]" />
-                                                  </Sequence>
-                                                  <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% toPauseInProgressed.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\toPauseInProgressed.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python log toPauseInProgressed" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_8" />
-                                                  <Delay Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_17" />
+                                                    </ui:WindowScope.Body>
+                                                  </ui:WindowScope>
+                                                  <Delay Duration="00:00:05" sap2010:WorkflowViewState.IdRef="Delay_15" />
                                                 </Sequence>
+                                                <Sequence DisplayName="data scraping" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                                                  <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'ClickSoft Page'" sap2010:WorkflowViewState.IdRef="WindowScope_9" InformativeScreenshot="a96b90c8d23cb0b38fad95e2a9967ce7" Selector="&lt;html title='ClickSoftware Workspace Web Client' /&gt;">
+                                                    <ui:WindowScope.Body>
+                                                      <ActivityAction x:TypeArguments="x:Object">
+                                                        <ActivityAction.Argument>
+                                                          <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+                                                        </ActivityAction.Argument>
+                                                        <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                                                          <ui:GetFullText DisplayName="Get full text 'list  m_dataGrid'" sap2010:WorkflowViewState.IdRef="GetFullText_2" IgnoreHidden="False">
+                                                            <ui:GetFullText.Target>
+                                                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="174359eee1514ce3a661452686133a45" Selector="&lt;wnd aaname='Silverlight Control' cls='MicrosoftSilverlight' /&gt;&lt;ctrl automationid='docking' /&gt;&lt;ctrl idx='3' name='Rad Split Container' role='client' /&gt;&lt;ctrl automationid='TaskListContainer' /&gt;&lt;ctrl automationid='TaskListPane' /&gt;&lt;ctrl automationid='tabControlTaskList' /&gt;&lt;ctrl automationid='tab1' /&gt;&lt;ctrl automationid='m_dataGrid' /&gt;" WaitForReady="INTERACTIVE" />
+                                                            </ui:GetFullText.Target>
+                                                            <ui:GetFullText.Text>
+                                                              <OutArgument x:TypeArguments="ui:GenericValue">[activityListRAW]</OutArgument>
+                                                            </ui:GetFullText.Text>
+                                                          </ui:GetFullText>
+                                                        </Sequence>
+                                                      </ActivityAction>
+                                                    </ui:WindowScope.Body>
+                                                  </ui:WindowScope>
+                                                </Sequence>
+                                                <ui:WriteTextFile DisplayName="Write raw activityListRAW" FileName="C:\uiPath\var\activityListValueOriginal.var" sap2010:WorkflowViewState.IdRef="WriteTextFile_3" Text="[activityListRAW]" />
+                                              </Sequence>
+                                              <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% activityListParser.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\activityListParser.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python Parse act-list" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_7" />
+                                              <Delay Duration="00:00:04" sap2010:WorkflowViewState.IdRef="Delay_16" />
+                                              <Sequence DisplayName="Read beautified activityList" sap2010:WorkflowViewState.IdRef="Sequence_44">
+                                                <Sequence.Variables>
+                                                  <Variable x:TypeArguments="x:String" Name="activityListForGeneratingDataTable" />
+                                                </Sequence.Variables>
+                                                <ui:ReadTextFile Content="[activityListForGeneratingDataTable]" DisplayName="Read beautified activityList" FileName="C:\uiPath\var\activityListValueBeautified.var" sap2010:WorkflowViewState.IdRef="ReadTextFile_7" />
+                                                <ui:GenerateDataTable ColumnSeparators="{x:Null}" ColumnSizes="{x:Null}" NewLineSeparator="{x:Null}" Positions="{x:Null}" DataTable="[activityListDataTable]" DisplayName="Generate data table:activityListDataTable" sap2010:WorkflowViewState.IdRef="GenerateDataTable_2" Input="[activityListForGeneratingDataTable]" />
+                                                <ui:OutputDataTable DataTable="[activityListDataTable]" DisplayName="[DEBUG]: Output data table" sap2010:WorkflowViewState.IdRef="OutputDataTable_2" Text="[outputActivityList]" />
+                                                <ui:CommentOut DisplayName="Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_16">
+                                                  <ui:CommentOut.Body>
+                                                    <Sequence DisplayName="Ignored Activities" sap2010:WorkflowViewState.IdRef="Sequence_43">
+                                                      <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="DEBUG: Message box" sap2010:WorkflowViewState.IdRef="MessageBox_12" Text="[outputActivityList]" TopMost="True" />
+                                                    </Sequence>
+                                                  </ui:CommentOut.Body>
+                                                </ui:CommentOut>
+                                                <ui:WriteTextFile DisplayName="LOG: Write datatable to text file" FileName="C:\uiPath\var\log\DEBUG_Datatable_As_String.log" sap2010:WorkflowViewState.IdRef="WriteTextFile_4" Text="[outputActivityList]" />
+                                              </Sequence>
+                                              <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% toPauseInProgressed.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\toPauseInProgressed.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Python log toPauseInProgressed" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_8" />
+                                              <Delay Duration="00:00:02" sap2010:WorkflowViewState.IdRef="Delay_17" />
+                                            </Sequence>
+                                          </If.Then>
+                                          <If.Else>
+                                            <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="on expected week view" />
+                                          </If.Else>
+                                        </If>
+                                        <FlowStep.Next>
+                                          <FlowStep x:Name="__ReferenceID17" sap2010:WorkflowViewState.IdRef="FlowStep_22">
+                                            <If Condition="[inProgressedActivity = &quot;NA&quot;]" DisplayName="If inProgressedActivity = &quot;NA&quot;" sap2010:WorkflowViewState.IdRef="If_6">
+                                              <If.Then>
+                                                <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="[exception]: inProgressedActivity" sap2010:WorkflowViewState.IdRef="MessageBox_15" Text="current week view doesnt include inProgressed Activity. Will go to last recorded start time to check" TopMost="True" />
                                               </If.Then>
-                                              <If.Else>
-                                                <WriteLine DisplayName="Write line" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="on expected week view" />
-                                              </If.Else>
                                             </If>
                                             <FlowStep.Next>
-                                              <FlowStep x:Name="__ReferenceID9" sap2010:WorkflowViewState.IdRef="FlowStep_10">
+                                              <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_10">
                                                 <Sequence DisplayName="IE-Change: Pause" sap2010:WorkflowViewState.IdRef="Sequence_30">
                                                   <Sequence.Variables>
                                                     <Variable x:TypeArguments="ui:UiElement" Name="popoutwindow" />
@@ -582,19 +630,19 @@
                                                   </ui:CommentOut>
                                                 </Sequence>
                                                 <FlowStep.Next>
-                                                  <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_8">
-                                                    <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% recordProgressedDurationRecord_Pause.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\recordProgressedDurationRecord_Pause.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Py: recordProgressedDurationRecord_Pause" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_5" />
+                                                  <FlowStep x:Name="__ReferenceID6" sap2010:WorkflowViewState.IdRef="FlowStep_8">
+                                                    <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="/C echo [%DATE%_%TIME% Pause_recordProgressedDurationRecord.py] &gt;&gt; C:\uiPath\var\log\python-logs.log &amp; C:\Python27\Python C:\uiPath\lib\Pause_recordProgressedDurationRecord.py &gt;&gt; C:\uiPath\var\log\python-logs.log" DisplayName="Py: recordProgressedDurationRecord" FileName="C:\windows\system32\cmd.exe" sap2010:WorkflowViewState.IdRef="StartProcess_5" />
                                                     <FlowStep.Next>
-                                                      <FlowStep x:Name="__ReferenceID8" sap2010:WorkflowViewState.IdRef="FlowStep_9">
+                                                      <FlowStep x:Name="__ReferenceID7" sap2010:WorkflowViewState.IdRef="FlowStep_9">
                                                         <Delay Duration="00:00:04" sap2010:WorkflowViewState.IdRef="Delay_9" />
                                                         <FlowStep.Next>
-                                                          <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_14">
+                                                          <FlowStep x:Name="__ReferenceID11" sap2010:WorkflowViewState.IdRef="FlowStep_14">
                                                             <ui:CloseWindow Selector="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Close window" sap2010:WorkflowViewState.IdRef="CloseWindow_2" UseWindow="[IE_Window]" WaitForReady="INTERACTIVE" />
                                                             <FlowStep.Next>
-                                                              <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_16">
+                                                              <FlowStep x:Name="__ReferenceID12" sap2010:WorkflowViewState.IdRef="FlowStep_16">
                                                                 <ui:StartProcess WorkingDirectory="{x:Null}" Arguments="C:\uiPath\var\activityProgressedDuration.record" DisplayName="Start:activityProgressedDuration.record" FileName="notepad.exe" sap2010:WorkflowViewState.IdRef="StartProcess_9" />
                                                                 <FlowStep.Next>
-                                                                  <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_18">
+                                                                  <FlowStep x:Name="__ReferenceID13" sap2010:WorkflowViewState.IdRef="FlowStep_18">
                                                                     <ui:WindowScope SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" ApplicationWindow="[selectNotepad]" DisplayName="focus 'ActivityP Notepad'" sap2010:WorkflowViewState.IdRef="WindowScope_11" InformativeScreenshot="cf4279bb9c78fc758d5b00fc5cf6e7be" Selector="&lt;wnd app='notepad.exe' cls='Notepad' title='activityProgressedDuration.record - Notepad' /&gt;">
                                                                       <ui:WindowScope.Body>
                                                                         <ActivityAction x:TypeArguments="x:Object">
@@ -615,10 +663,10 @@
                                                                       </ui:WindowScope.Body>
                                                                     </ui:WindowScope>
                                                                     <FlowStep.Next>
-                                                                      <FlowStep x:Name="__ReferenceID17" sap2010:WorkflowViewState.IdRef="FlowStep_20">
+                                                                      <FlowStep x:Name="__ReferenceID15" sap2010:WorkflowViewState.IdRef="FlowStep_20">
                                                                         <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" Buttons="Ok" DisplayName="Message box" sap2010:WorkflowViewState.IdRef="MessageBox_14" Text="!!! Warning !!! Please check the progressed duration, if any duplicated data, remove corresponding lines and save." TopMost="True" />
                                                                         <FlowStep.Next>
-                                                                          <FlowStep x:Name="__ReferenceID16" sap2010:WorkflowViewState.IdRef="FlowStep_19">
+                                                                          <FlowStep x:Name="__ReferenceID14" sap2010:WorkflowViewState.IdRef="FlowStep_19">
                                                                             <ui:MaximizeWindow DisplayName="Maximize window" sap2010:WorkflowViewState.IdRef="MaximizeWindow_3" Window="[selectNotepad]" />
                                                                           </FlowStep>
                                                                         </FlowStep.Next>
@@ -671,13 +719,10 @@
     <x:Reference>__ReferenceID12</x:Reference>
     <x:Reference>__ReferenceID13</x:Reference>
     <x:Reference>__ReferenceID14</x:Reference>
-    <FlowStep sap2010:WorkflowViewState.IdRef="FlowStep_17">
-      <Sequence DisplayName="Recording Sequence" sap2010:WorkflowViewState.IdRef="Sequence_47" />
-    </FlowStep>
     <x:Reference>__ReferenceID15</x:Reference>
     <x:Reference>__ReferenceID16</x:Reference>
     <x:Reference>__ReferenceID17</x:Reference>
-    <sads:DebugSymbol.Symbol>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A9IBAgFvrAPPAawD5QECAWysA1OsA2wCAWq0A+kBtAP/AQIBZrQDgAG0A7EBAgFl5wOKAecDmgECAUbpA84B6QPhAQIBRJMEPZoESAIBLpsEPZsEhQECASycBD2cBLUBAgEqnQQ9qwRIAgEorAQ9sARLAgElsQQ9tQRLAgEitgQ9ugRLAgEfdKICdN0CAwGrAnR1dIIBAwGpAnobqgEmAwGPAsQBrAHEAYEFAwGIAsEBRcEBSAMBhwLBATjBATwDAYYCxwEpxwEzAwGEAs0BrAHNAYEFAwGCAsoBRcoBSAMBgQLKATjKATwDAYAC4AGsAeABqgQDAfgB4wFM4wFdAwH2AagCygGoAtABAwG6Aa4CPecCTgMBmwHvAsEC7wL8AgMBlwH1Aj2HA0gDAYwBiwNHiwNRAwGKAY4DwQKOA/wCAwGHAZQDPZ0DSAMBggGYBNABmAT5AgIBMZUEaZUEbQIBMJUEXJUEYAIBL5sETZsEVwIBLZwElAGcBLIBAgErqQTQAakEvgICASmuBNABrgS+AgIBJ6wE1gKsBIwDAgEmswTQAbMEvgICASSxBMwCsQSCAwIBI7gE0AG4BL4CAgEhtgTYArYE7QICASB7HYEBLQMBqAKCAR2CAYwBAwGlAoMBHYMBmAEDAaIChAEdhAGVAQMBnwKFAR2FAWQDAZ0ChgEdigE2AwGbAosBHYsBZAMBmQKMAR2SAS0DAZgCkwEdqQEoAwGQAq4CygKuAoUDAwG4Aa4CnQGuAqoBAwG2AbQCQ+QCTgMBnAH2Aj/9AkoDAZMB/gI//gKHAQMBkQH/Aj+GA0oDAY0BlQM/nANQAwGDAYIBfIIBiQEDAaYCgwGIAYMBlQEDAaMChAGFAYQBkgEDAaAChQEthQE3AwGeAogBsAGIAZMDAwGcAosBLYsBNwMBmgKUAR+oAS8DAZECtQJFuwJVAwG1AbwCRbwCtAEDAbIBvQJFvQLAAQMBrwG+AkW+Ar0BAwGsAb8CRb8CjQEDAaoBwAJFxAJeAwGoAcUCRcUCjQEDAaYBxgJFzAJVAwGlAc0CReMCUAMBnQH7AtIB+wKnBQMBlgH4Amv4Am4DAZUB+AJe+AJiAwGUAf4CT/4CWQMBkgGEA9IBhAOnBQMBkAGBA2uBA24DAY8BgQNegQNiAwGOAZcD0gGXA9AEAwGGAZoDcpoDgwEDAYQBogEjpgE8AwGWApoBJZ4BMwMBkgK8AqQBvAKxAQMBswG9ArABvQK9AQMBsAG+Aq0BvgK6AQMBrQG/AlW/Al8DAasBwgLYAcICuwMDAakBxQJVxQJfAwGnAc4CR+ICVwMBngGkAbYBpAHUAgMBlwKcAbgBnAHdAQMBlQKaAcUCmgHSAgMBkwLcAkvgAmQDAaMB1AJN2AJbAwGfAd4C3gHeAvwCAwGkAdYC4AHWAoUCAwGiAdQC7QLUAvoCAwGgAQ==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Flowchart>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -832,68 +877,74 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_18" sap:VirtualizedContainerService.HintSize="852,22" />
+      <sap2010:ViewStateData Id="ReadTextFile_8" sap:VirtualizedContainerService.HintSize="852,59" />
+      <sap2010:ViewStateData Id="StartProcess_10" sap:VirtualizedContainerService.HintSize="852,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_19" sap:VirtualizedContainerService.HintSize="852,22" />
+      <sap2010:ViewStateData Id="WriteTextFile_5" sap:VirtualizedContainerService.HintSize="572,87" />
+      <sap2010:ViewStateData Id="ReadTextFile_9" sap:VirtualizedContainerService.HintSize="572,59" />
+      <sap2010:ViewStateData Id="Delay_20" sap:VirtualizedContainerService.HintSize="572,22" />
+      <sap2010:ViewStateData Id="WriteTextFile_6" sap:VirtualizedContainerService.HintSize="572,87" />
+      <sap2010:ViewStateData Id="ReadTextFile_10" sap:VirtualizedContainerService.HintSize="314,59" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_1" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_2" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="Delay_21" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="StartProcess_11" sap:VirtualizedContainerService.HintSize="314,87">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="Delay_22" sap:VirtualizedContainerService.HintSize="314,22" />
+      <sap2010:ViewStateData Id="Sequence_49" sap:VirtualizedContainerService.HintSize="336,688">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_4" sap:VirtualizedContainerService.HintSize="211,61" />
+      <sap2010:ViewStateData Id="If_3" sap:VirtualizedContainerService.HintSize="572,836" />
+      <sap2010:ViewStateData Id="Sequence_50" sap:VirtualizedContainerService.HintSize="594,1375">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="ReadTextFile_11" sap:VirtualizedContainerService.HintSize="594,59" />
+      <sap2010:ViewStateData Id="InvokeWorkflowFile_3" sap:VirtualizedContainerService.HintSize="314,87" />
+      <sap2010:ViewStateData Id="WriteLine_5" sap:VirtualizedContainerService.HintSize="211,61" />
+      <sap2010:ViewStateData Id="If_4" sap:VirtualizedContainerService.HintSize="594,235" />
+      <sap2010:ViewStateData Id="Sequence_51" sap:VirtualizedContainerService.HintSize="616,1873">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteLine_6" sap:VirtualizedContainerService.HintSize="211,61" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="852,2021" />
+      <sap2010:ViewStateData Id="Sequence_52" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            <x:Boolean x:Key="IsPinned">False</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Delay_7" sap:VirtualizedContainerService.HintSize="200,22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="ReadTextFile_3" sap:VirtualizedContainerService.HintSize="314,59">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GenerateDataTable_1" sap:VirtualizedContainerService.HintSize="314,22">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="OutputDataTable_1" sap:VirtualizedContainerService.HintSize="314,22">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MessageBox_6" sap:VirtualizedContainerService.HintSize="314,59">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_17" sap:VirtualizedContainerService.HintSize="336,183">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="CommentOut_6" sap:VirtualizedContainerService.HintSize="314,51">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WriteTextFile_2" sap:VirtualizedContainerService.HintSize="314,87">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="200,51">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            <x:Boolean x:Key="IsPinned">False</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -912,13 +963,6 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ReadTextFile_5" sap:VirtualizedContainerService.HintSize="200,51">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="MessageBox_13" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1157,6 +1201,20 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="MessageBox_15" sap:VirtualizedContainerService.HintSize="314,59">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="200,51">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="ReadTextFile_4" sap:VirtualizedContainerService.HintSize="653,59" />
       <sap2010:ViewStateData Id="Assign_2" sap:VirtualizedContainerService.HintSize="653,60" />
       <sap2010:ViewStateData Id="Assign_3" sap:VirtualizedContainerService.HintSize="653,60" />
@@ -1344,30 +1402,30 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_11">
+      <sap2010:ViewStateData Id="FlowStep_22">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,714.5</av:Point>
+            <av:Point x:Key="ShapeLocation">190,704.02</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,765.5 290,784.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">290,755.02 290,784.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_13">
+      <sap2010:ViewStateData Id="FlowStep_11">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,634.5</av:Point>
+            <av:Point x:Key="ShapeLocation">190,624.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,685.5 290,714.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">290,675.5 290,704.02</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_12">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,544.5</av:Point>
+            <av:Point x:Key="ShapeLocation">190,554.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,595.5 290,634.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">290,605.5 290,624.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -1376,7 +1434,7 @@
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">190,496.5</av:Point>
             <av:Size x:Key="ShapeSize">200,22</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,518.5 290,544.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">290,518.5 290,554.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -1389,21 +1447,21 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_1">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,354.5</av:Point>
-            <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,405.5 290,425.5</av:PointCollection>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="FlowStep_2">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">190,309</av:Point>
+            <av:Point x:Key="ShapeLocation">190,379</av:Point>
             <av:Size x:Key="ShapeSize">200,22</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,331 290,354.5</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">290,401 290,425.5</av:PointCollection>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="FlowStep_21">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <av:Point x:Key="ShapeLocation">190,305.5</av:Point>
+            <av:Size x:Key="ShapeSize">200,51</av:Size>
+            <av:PointCollection x:Key="ConnectorLocation">290,356.5 290,379</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -1412,7 +1470,7 @@
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <av:Point x:Key="ShapeLocation">190,234.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
-            <av:PointCollection x:Key="ConnectorLocation">290,285.5 290,309</av:PointCollection>
+            <av:PointCollection x:Key="ConnectorLocation">290,285.5 290,305.5</av:PointCollection>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
@@ -1431,21 +1489,6 @@
             <av:Point x:Key="ShapeLocation">190,94.5</av:Point>
             <av:Size x:Key="ShapeSize">200,51</av:Size>
             <av:PointCollection x:Key="ConnectorLocation">290,145.5 290,164.5</av:PointCollection>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_47" sap:VirtualizedContainerService.HintSize="200,51">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="FlowStep_17">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <av:Point x:Key="ShapeLocation">440,914.5</av:Point>
-            <av:Size x:Key="ShapeSize">200,51</av:Size>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>

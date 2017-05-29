@@ -10,7 +10,7 @@
  xmlns:ui="http://schemas.uipath.com/workflow/activities"
  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="arg_startDate" Type="InArgument(x:String)" />
+    <x:Property Name="viewDate" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -97,7 +97,7 @@
                     <ActivityAction.Argument>
                       <DelegateInArgument x:TypeArguments="ui:Anchor" Name="ContextAnchor" />
                     </ActivityAction.Argument>
-                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Action Type into 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_19" SendWindowMessages="True" SimulateType="False" Text="[arg_startDate]">
+                    <ui:TypeInto DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DelayMS="{x:Null}" Activate="True" ClickBeforeTyping="False" DisplayName="Action Type into 'editable text'" EmptyField="False" sap2010:WorkflowViewState.IdRef="TypeInto_19" SendWindowMessages="True" SimulateType="False" Text="[viewDate]">
                       <ui:TypeInto.Target>
                         <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" TimeoutMS="{x:Null}" InformativeScreenshot="b4848b45837f1a71def2653a5147ca41" Selector="&lt;ctrl role='editable text' /&gt;" WaitForReady="INTERACTIVE" />
                       </ui:TypeInto.Target>
@@ -137,7 +137,7 @@
         </ActivityAction>
       </ui:WindowScope.Body>
     </ui:WindowScope>
-    <sads:DebugSymbol.Symbol>dyVDOlx1aVBhdGhccHJvY2Vzc1xzd2l0Y2hEYXRlVmlldy54YW1sHT8DjQEOAgEBQAWLARYCAQJAzwFAigICAR5GC4gBFgIBA0cNVh0CAR1XDVsmAgEbXA1cVQIBGV0NcxgCARF0DYYBGAIBBocBDYcBVQIBBFmgAVmDAwIBHFwdXCcCARpeD3IfAgESdQ98GgIBDX0PfVcCAQt+D4UBGgIBB4cBHYcBJwIBBWwTcCwCARdkFWgjAgETeqIBevcEAgEQdzt3PgIBD3cudzICAQ59H30pAgEMgwGiAYMB9wQCAQqAATuAAT4CAQmAAS6AATICAQhupgFuxAICARhmqAFmzQECARZktgJkxwICARQ=</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyVDOlx1aVBhdGhccHJvY2Vzc1xzd2l0Y2hEYXRlVmlldy54YW1sHT8DjQEOAgEBQAWLARYCAQJAzwFAigICAR5GC4gBFgIBA0cNVh0CAR1XDVsmAgEbXA1cVQIBGV0NcxgCARF0DYYBGAIBBocBDYcBVQIBBFmgAVmDAwIBHFwdXCcCARpeD3IfAgESdQ98GgIBDX0PfVcCAQt+D4UBGgIBB4cBHYcBJwIBBWwTcCwCARdkFWgjAgETeqIBevcEAgEQdzt3PgIBD3cudzICAQ59H30pAgEMgwGiAYMB9wQCAQqAATuAAT4CAQmAAS6AATICAQhupgFuxAICARhmqAFmzQECARZktgJkwgICARQ=</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -222,7 +222,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="switchDateView_1" sap:VirtualizedContainerService.HintSize="476,1632" />
+      <sap2010:ViewStateData Id="switchDateView_1" sap:VirtualizedContainerService.HintSize="476,1752" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

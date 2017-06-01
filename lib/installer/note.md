@@ -1,3 +1,6 @@
+# how to build a release
+
+exec build-7zSfx.bat
 
 # schtasks for start a robot example 
 

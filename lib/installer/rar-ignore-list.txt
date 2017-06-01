@@ -1,0 +1,10 @@
+*.pye
+*.pyc
+*.record
+*.var
+*.list
+*.log
+*.txt
+DTRA-Wizard-Setup*.exe
+c:\uiPath\lib\installer\release\*
+.git*

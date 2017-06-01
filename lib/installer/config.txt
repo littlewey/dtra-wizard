@@ -1,0 +1,10 @@
+﻿; DTRA-Wizard
+Path=%systemdrive%
+Setup=uiPath\lib\installer\post-setup\post-setup.bat
+; SetupCode
+; Extract the files to a temporary directory
+; TempMode
+; Use semi-silent mode
+; Silent=1
+; Overwrite any existing files
+Overwrite=1

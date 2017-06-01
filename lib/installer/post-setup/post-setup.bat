@@ -4,6 +4,12 @@ echo ####################
 
 copy uiPath\lib\installer\post-setup\*.lnk %systemdrive%\users\%username%\Desktop
 
+echo ##################
+echo ## Change icons ##
+echo ##################
+
+start /wait uiPath\lib\installer\changeICON.vbs
+
 echo ####################
 echo ## install Python ##
 echo ####################

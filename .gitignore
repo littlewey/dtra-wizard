@@ -37,3 +37,6 @@ lib/installer/release/*
 NDP461-KB3102436-x86-x64-AllOS-ENU.exe
 UiPathStudio.exe
 DTRA-Wizard-Setup*
+debug
+debug/*
+debug/*/*

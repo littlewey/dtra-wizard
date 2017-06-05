@@ -37,6 +37,8 @@ with open(ignoredActivityIdPath) as ignoredActivityIdFile:
 
 if ignoredActivityId != "NA":
     ignoredActivityIdList = ignoredActivityId.split()
+else:
+    ignoredActivityIdList = []
 
 with open(dispatchedActivityPath) as dispatchedActivityFile:
     dispatchedActivity = dispatchedActivityFile.read()

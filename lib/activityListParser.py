@@ -26,12 +26,13 @@ timeFormat = '%m/%d/%Y-%H:%M'
 ignoredActivityIdPath = r'C:\uiPath\var\ignoredActivityId.list'
 with open(ignoredActivityIdPath) as ignoredActivityIdFile:
     ignoredActivityId = ignoredActivityIdFile.read()
-
+else:
+    ignoredActivityIdList = []
 if ignoredActivityId != "NA":
     ignoredActivityIdList = ignoredActivityId.split()
 
 with open(activityListFilePath) as activityListFile:
-    activityListUrgly = activityListFile.read()
+    activityListUrgly = activityListFile.read().strip('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData\n')
 
 parsedActivityTable = str()
 

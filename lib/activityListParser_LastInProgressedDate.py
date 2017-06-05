@@ -29,7 +29,7 @@ timeFormat = '%m/%d/%Y-%H:%M'
 
 
 with open(activityListFilePath) as activityListFile:
-    activityListUrgly = activityListFile.read()
+    activityListUrgly = activityListFile.read().strip('W6.Web.UI.Controls.W6DataGrid+W6DataGridItemData\n')
 
 parsedActivityTable = str()
 
@@ -38,7 +38,8 @@ with open(ignoredActivityIdPath) as ignoredActivityIdFile:
 
 if ignoredActivityId != "NA":
     ignoredActivityIdList = ignoredActivityId.split()
-
+else:
+    ignoredActivityIdList = []
 
 # init state variable
 

@@ -108,7 +108,7 @@ with open(state1_ifCompeleteNowPath,'w') as state1_ifCompeleteNowFile:
 completeTime = datetime.now() + (leftDuration if leftDuration.total_seconds() > 420 else timedelta(minutes=7))
 
 if state1_ifCompeleteNow != "0":
-    completeTime = datetime.now() + timedelta(minutes=3)
+    completeTime = datetime.now() + timedelta(seconds=70)
 
 timeFormat = '%m/%d/%Y-%H:%M'
 completeTimeString = completeTime.strftime(timeFormat)

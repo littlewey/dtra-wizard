@@ -15,6 +15,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>IE_DTRA_webClient_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -81,6 +82,7 @@
                   <ui:ShowWindow DisplayName="Show window" sap2010:WorkflowViewState.IdRef="ShowWindow_2" Window="[IE_Window]" />
                   <ui:MaximizeWindow DisplayName="Maximize window" sap2010:WorkflowViewState.IdRef="MaximizeWindow_2" Window="[IE_Window]" />
                   <ui:RestoreWindow DisplayName="Restore window" sap2010:WorkflowViewState.IdRef="RestoreWindow_2" Window="[IE_Window]" />
+                  <ui:MoveWindow DisplayName="Move window" Height="760" sap2010:WorkflowViewState.IdRef="MoveWindow_1" Width="1360" Window="[IE_Window]" X="3" Y="3" />
                   <Delay Duration="00:00:15" sap2010:WorkflowViewState.IdRef="Delay_37" />
                   <ui:CommentOut DisplayName="backup switch data view Comment out" sap2010:WorkflowViewState.IdRef="CommentOut_48">
                     <ui:CommentOut.Body>
@@ -126,15 +128,15 @@
         </Sequence>
       </ActivityAction>
     </ui:OpenBrowser.Body>
-    <sads:DebugSymbol.Symbol>dyhDOlx1aVBhdGhccHJvY2Vzc1xJRV9EVFJBX3dlYkNsaWVudC54YW1sEj4DggEUAgEBPsUBPpQCAgEWRAl+FAIBAkULSRsCARRKC30cAgEDRZoBRaABAgEVSqACStsCAgETSmtKeAIBEVARehwCAQRRE1GCAQIBDlITUo4BAgELUxNTiwECAQhUE1RbAgEGVRN5IwIBBVFyUX8CAQ9SflKLAQIBDFN7U4gBAgEJVCNULQIBBw==</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>dyhDOlx1aVBhdGhccHJvY2Vzc1xJRV9EVFJBX3dlYkNsaWVudC54YW1sGD8DhAEUAgEBP8UBP5QCAgEdRQmAARQCAQJGC0obAgEbSwt/HAIBA0aaAUagAQIBHEugAkvbAgIBGktrS3gCARhREXwcAgEEUhNSggECARVTE1OOAQIBElQTVIsBAgEPVRNVqAECAQhWE1ZbAgEGVxN7IwIBBVJyUn8CARZTflOLAQIBE1R7VIgBAgEQVUNVSAIBDlWcAVWfAQIBDVWiAVWlAQIBDFWMAVWZAQIBClV+VYQBAgEJViNWLQIBBw==</sads:DebugSymbol.Symbol>
   </ui:OpenBrowser>
-  <sap2010:WorkflowViewState.IdRef>IE_DTRA_webClient_1</sap2010:WorkflowViewState.IdRef>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
       <sap2010:ViewStateData Id="SendHotkey_11" sap:VirtualizedContainerService.HintSize="452,116" />
       <sap2010:ViewStateData Id="ShowWindow_2" sap:VirtualizedContainerService.HintSize="416,22" />
       <sap2010:ViewStateData Id="MaximizeWindow_2" sap:VirtualizedContainerService.HintSize="416,22" />
       <sap2010:ViewStateData Id="RestoreWindow_2" sap:VirtualizedContainerService.HintSize="416,22" />
+      <sap2010:ViewStateData Id="MoveWindow_1" sap:VirtualizedContainerService.HintSize="416,22" />
       <sap2010:ViewStateData Id="Delay_37" sap:VirtualizedContainerService.HintSize="416,22" />
       <sap2010:ViewStateData Id="WaitUiElementAppear_29" sap:VirtualizedContainerService.HintSize="366,106" />
       <sap2010:ViewStateData Id="Delay_38" sap:VirtualizedContainerService.HintSize="366,22" />
@@ -164,15 +166,15 @@
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="CommentOut_48" sap:VirtualizedContainerService.HintSize="416,253" />
-      <sap2010:ViewStateData Id="Sequence_200" sap:VirtualizedContainerService.HintSize="438,625">
+      <sap2010:ViewStateData Id="Sequence_200" sap:VirtualizedContainerService.HintSize="438,687">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WindowScope_54" sap:VirtualizedContainerService.HintSize="452,771" />
-      <sap2010:ViewStateData Id="Sequence_202" sap:VirtualizedContainerService.HintSize="474,1051">
+      <sap2010:ViewStateData Id="WindowScope_54" sap:VirtualizedContainerService.HintSize="452,833" />
+      <sap2010:ViewStateData Id="Sequence_202" sap:VirtualizedContainerService.HintSize="474,1113">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -180,7 +182,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="OpenBrowser_3" sap:VirtualizedContainerService.HintSize="488,1230">
+      <sap2010:ViewStateData Id="OpenBrowser_3" sap:VirtualizedContainerService.HintSize="488,1292">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -188,7 +190,7 @@
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="IE_DTRA_webClient_1" sap:VirtualizedContainerService.HintSize="528,1390" />
+      <sap2010:ViewStateData Id="IE_DTRA_webClient_1" sap:VirtualizedContainerService.HintSize="528,1452" />
     </sap2010:ViewStateManager>
   </sap2010:WorkflowViewState.ViewStateManager>
 </Activity>

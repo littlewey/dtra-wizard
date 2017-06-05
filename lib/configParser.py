@@ -24,7 +24,6 @@ preferredStartDate = configCSV[0].split(',')[1]
 if '/' in preferredStartDate:
     with open(outputStartDatePath,'w') as outputStartDateFile:
         outputStartDateFile.write(preferredStartDate)
-
 # log
 print str(datetime.now()) + " preferredStartDate : \n" + preferredStartDate + "\n"
 
@@ -81,7 +80,7 @@ print str(datetime.now()) + " ignoredActivityId : \n" + '\n'.join(ignoredActivit
 if '%' not in configCSV[3].split(',')[1]:
     completeScheduleRate = "0.94"
 else:
-    completeScheduleRate = "0." + configCSV[3].split(',')[1][:-1]
+    completeScheduleRate = str(float(configCSV[3].split(',')[1][:-1])/100)
 
 with open(outputCompleteScheduleRatePath,'w') as outputCompleteScheduleRateFile:
     outputCompleteScheduleRateFile.write(completeScheduleRate)

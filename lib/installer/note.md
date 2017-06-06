@@ -30,3 +30,13 @@ schtasks /QUERY /TN toCompleteDTRA /XML | findstr  ":"
 schtasks.exe /Delete /TN toCompleteDTRA /F
 
 "/C echo [%DATE%_%TIME%  schtasks-cancel] >> C:\uiPath\var\log\schtasks.log & " + "schtasks.exe /Delete /TN toCompleteDTRA /F" + " >> C:\uiPath\var\log\schtasks.log & schtasks /QUERY /TN toCompleteDTRA /XML | findstr  : >> C:\uiPath\var\log\schtasks.log"
+
+
+# update cli
+cd /d C:\
+rmdir upgradeBuffer /S /Q
+mkdir uiPath-updater
+xcopy uiPath\lib\installer\git-bash uiPath-updater /Y
+uiPath-updater\git-cmd.exe git clone https://github.com/littlewey/dtra-wizard upgradeBuffer
+xcopy upgradeBuffer\* uiPath /Y
+rmdir upgradeBuffer /S /Q

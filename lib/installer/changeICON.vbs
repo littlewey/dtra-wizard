@@ -27,3 +27,10 @@ Set objShortcut = objFolderItem.GetLink
 objShortcut.SetIconLocation "c:\uiPath\lib\guiApp\ico\selfCheck.ico", 0
 
 objShortcut.Save
+Set objFolderItem = objFolder.ParseName("DTRA-update.lnk")
+
+Set objShortcut = objFolderItem.GetLink
+
+objShortcut.SetIconLocation "c:\uiPath\lib\guiApp\ico\update.ico", 0
+
+objShortcut.Save

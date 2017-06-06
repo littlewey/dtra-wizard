@@ -62,6 +62,44 @@ optimizedDuration =timedelta(seconds=plannedDuration.total_seconds() * completeS
 print str(datetime.now()) + " optimizedDuration with  completeScheduleRate:  \n" + str(optimizedDuration) + "\n"
 
 
+####################################################################
+############### parse startTimeStamp.record ########################
+####################################################################
+
+print "###############################"
+print "# parse startTimeStamp.record #"
+print "###############################"
+
+startTimeStampPath = r'C:\uiPath\var\startTimeStamp.record'
+with open(startTimeStampPath) as startTimeStampFile:
+    startTimeStamp = startTimeStampFile.read()
+startTimeRecordLatest = str()
+
+startTimeStampList = startTimeStamp.split('\n')
+
+# remove blank in the end if existed 
+if startTimeStampList[-1] == '':
+    startTimeStampList.pop()
+
+for line in startTimeStampList:
+    if line.split()[1].strip() == pausedActivity:
+        startTimeRecordLatest = line.split()[0].strip()
+
+# log
+print str(datetime.now()) + " startTimeRecordLatest : \n" + startTimeRecordLatest + "\n"
+
+timeFormat = '%m/%d/%Y-%H:%M'
+
+activityLastStartedDatetime = datetime.strptime(startTimeRecordLatest,timeFormat)
+
+#####################################################################
+
+activityProgressedDuration = datetime.now() - activityLastStartedDatetime
+
+# log
+print str(datetime.now()) + " activityProgressedDuration :" 
+print activityProgressedDuration
+
 ################################################################################
 activityProgressedDurationPath = r'C:\uiPath\var\activityProgressedDuration.record'
 if os.path.isfile(activityProgressedDurationPath):
@@ -96,7 +134,8 @@ else:
     print str(datetime.now()) + " C:\uiPath\var\activityProgressedDuration.record not exist: \n"
     sumActivityProgressedDuration = timedelta(minutes=0)
 ################################################################################
-leftDuration = optimizedDuration - sumActivityProgressedDuration
+
+leftDuration = optimizedDuration - sumActivityProgressedDuration - activityProgressedDuration
 # log
 print str(datetime.now()) + " leftDuration:  \n" + str(leftDuration) + "\n"
 

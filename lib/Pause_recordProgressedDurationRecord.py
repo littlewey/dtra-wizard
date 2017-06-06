@@ -9,7 +9,7 @@ print "# Record Progressed Record; After Pausing an activity #"
 print "#######################################################"
 
 
-startTimeStampPath = r'C:\uiPath\var\startTimeStamp.record'
+
 activityProgressedDurationPath = r'C:\uiPath\var\activityProgressedDuration.record'
 activityListFileBeautifiedPath = r'C:\uiPath\var\activityListValueBeautified.var'
 inProgressActivityPath = r'C:\uiPath\var\inProgressActivity.var'
@@ -23,7 +23,15 @@ pausedActivity = inProgressActivity
 # log
 print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
 
+######################################################
+# parse startTimeStamp.record 
+######################################################
 
+print "###############################"
+print "# parse startTimeStamp.record #"
+print "###############################"
+
+startTimeStampPath = r'C:\uiPath\var\startTimeStamp.record'
 with open(startTimeStampPath) as startTimeStampFile:
     startTimeStamp = startTimeStampFile.read()
 startTimeRecordLatest = str()
@@ -41,6 +49,8 @@ for line in startTimeStampList:
 # log
 print str(datetime.now()) + " startTimeRecordLatest : \n" + startTimeRecordLatest + "\n"
 
+#####################################################################
+
 timeFormat = '%m/%d/%Y-%H:%M'
 
 activityLastStartedDatetime = datetime.strptime(startTimeRecordLatest,timeFormat)
@@ -49,6 +59,7 @@ activityProgressedDuration = datetime.now() - activityLastStartedDatetime
 # log
 print str(datetime.now()) + " activityProgressedDuration :" 
 print activityProgressedDuration
+
 
 # remove after .
 activityProgressedDurationString = str(activityProgressedDuration).split(".")[0] if "." in str(activityProgressedDuration) else str(activityProgressedDuration)

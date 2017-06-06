@@ -23,9 +23,9 @@ pausedActivity = inProgressActivity
 # log
 print str(datetime.now()) + " pausedActivity : \n" + pausedActivity + "\n"
 
-######################################################
-# parse startTimeStamp.record 
-######################################################
+####################################################################
+############### parse startTimeStamp.record ########################
+####################################################################
 
 print "###############################"
 print "# parse startTimeStamp.record #"
@@ -49,11 +49,13 @@ for line in startTimeStampList:
 # log
 print str(datetime.now()) + " startTimeRecordLatest : \n" + startTimeRecordLatest + "\n"
 
-#####################################################################
-
 timeFormat = '%m/%d/%Y-%H:%M'
 
 activityLastStartedDatetime = datetime.strptime(startTimeRecordLatest,timeFormat)
+
+#####################################################################
+
+
 activityProgressedDuration = datetime.now() - activityLastStartedDatetime
 
 # log

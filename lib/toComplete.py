@@ -82,7 +82,7 @@ if startTimeStampList[-1] == '':
     startTimeStampList.pop()
 
 for line in startTimeStampList:
-    if line.split()[1].strip() == pausedActivity:
+    if line.split()[1].strip() == activityIdToComplete:
         startTimeRecordLatest = line.split()[0].strip()
 
 # log

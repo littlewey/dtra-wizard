@@ -50,7 +50,7 @@ for line in startTimeStampList:
 print str(datetime.now()) + " startTimeRecordLatest : \n" + startTimeRecordLatest + "\n"
 
 timeFormat = '%m/%d/%Y-%H:%M'
-
+print startTimeRecordLatest
 activityLastStartedDatetime = datetime.strptime(startTimeRecordLatest,timeFormat)
 
 #####################################################################

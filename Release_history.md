@@ -1,3 +1,11 @@
+2017/06/07
+- update process optimized:avoid override Preference_Configuration.csv during OTA updating
+- [Bug:coverred lines of activities cannot be selected by UiPath]
+    + Workaround: add filter with condition: contains one of [status= "Dispatched","Paused","InProgress"]
+- [Bug:status changed but not shown changed][pending]
+    + Root cause:suspect bugs of DTRA web client triggerred by close window very fast
+    + Workaround: add delay 2 seconds
+    + Status: await further test
 2017/06/06
 - add build release for no-dependency package
 - modify update source from github to gitlab to enhance speed

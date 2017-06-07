@@ -17,3 +17,4 @@ dtra-wizard is an UiPath based project
 
 1. check activity list view (column order etc..)
 2. check window size: the last column must not be covered
+3. add and apply filter with this condition in DTRA:contains one of [status= "Dispatched","Paused","InProgress"]

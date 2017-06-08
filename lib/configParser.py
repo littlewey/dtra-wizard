@@ -20,6 +20,8 @@ with open(configInputPath) as configCSVFile:
 
 ###################### preferredStartDate #####################
 preferredStartDate = configCSV[0].split(',')[1]
+if preferredStartDate == "":
+    preferredStartDate = "NA"
 # write only when field was filled 
 if '/' in preferredStartDate:
     with open(outputStartDatePath,'w') as outputStartDateFile:
@@ -38,6 +40,8 @@ preferredActivityId = configCSV[1].split(',')[1:]
 # remove "," in the end if existed 
 if preferredActivityId[-1] == '':
     preferredActivityId.pop()
+if preferredActivityId == []:
+    preferredActivityId = ['NA']
 
 # write "NA" when field was not filled
 
@@ -60,7 +64,8 @@ ignoredActivityId = configCSV[2].split(',')[1:]
 # remove "," in the end if existed 
 if ignoredActivityId[-1] == '':
     ignoredActivityId.pop()
-
+if ignoredActivityId == []:
+    ignoredActivityId = ['NA']
 # write "NA" when field was not filled
 
 with open(outputIgnoredActivityIdPath,'w') as IgnoredActivityIdFile:
@@ -75,10 +80,13 @@ print str(datetime.now()) + " ignoredActivityId : \n" + '\n'.join(ignoredActivit
 
 
 ###################### outputCompleteScheduleRate #####################
+completeScheduleRate = configCSV[3].split(',')[1]
+if  completeScheduleRate == "":
+    completeScheduleRate = "1"
 
 # write only when field was filled 
-if '%' not in configCSV[3].split(',')[1]:
-    completeScheduleRate = "0.94"
+if '%' not in completeScheduleRate:
+    completeScheduleRate = "1"
 else:
     completeScheduleRate = str(float(configCSV[3].split(',')[1][:-1])/100)
 

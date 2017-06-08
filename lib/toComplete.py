@@ -136,12 +136,16 @@ leftDuration = optimizedDuration - sumActivityProgressedDuration - activityProgr
 # log
 print str(datetime.now()) + " leftDuration:  \n" + str(leftDuration) + "\n"
 
+intervalTimerNextStart = 180
+# log
+print str(datetime.now()) + " intervalTimerNextStart:  \n" + str(intervalTimerNextStart) + "\n"
+
 state1_ifCompeleteNowPath = r'C:\uiPath\var\state1_ifCompeleteNow.var'
-state1_ifCompeleteNow = "0" if leftDuration.total_seconds() > 420 else inProgressActivity
+state1_ifCompeleteNow = "0" if leftDuration.total_seconds() > intervalTimerNextStart else inProgressActivity
 with open(state1_ifCompeleteNowPath,'w') as state1_ifCompeleteNowFile:
     state1_ifCompeleteNowFile.write(state1_ifCompeleteNow)
 
-completeTime = datetime.now() + (leftDuration if leftDuration.total_seconds() > 420 else timedelta(minutes=7))
+completeTime = datetime.now() + (leftDuration if leftDuration.total_seconds() > intervalTimerNextStart else timedelta(minutes=7))
 
 if state1_ifCompeleteNow != "0":
     completeTime = datetime.now() + timedelta(seconds=70)

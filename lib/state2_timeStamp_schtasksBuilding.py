@@ -120,10 +120,17 @@ completeScheduleRate = float(completeScheduleRateString)
 # log
 print str(datetime.now()) + " completeScheduleRate : \n" + completeScheduleRateString + "\n"
 
+
 optimizedDuration =timedelta(seconds=plannedDuration.total_seconds() * completeScheduleRate)
 
 # log
 print str(datetime.now()) + " optimizedDuration with  completeScheduleRate:  \n" + str(optimizedDuration) + "\n"
+
+actionDelayAdjustmentTime = 60
+optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime)
+
+# log
+print str(datetime.now()) + " optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime):  \n" + str(optimizedDuration) + "\n"
 
 
 leftDuration = optimizedDuration - sumActivityProgressedDuration

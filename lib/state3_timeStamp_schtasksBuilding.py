@@ -84,6 +84,13 @@ optimizedDuration =timedelta(seconds=duration.total_seconds() * completeSchedule
 print str(datetime.now()) + " optimizedDuration with  completeScheduleRate:  \n" + str(optimizedDuration) + "\n"
 
 
+actionDelayAdjustmentTime = 60
+optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime)
+
+# log
+print str(datetime.now()) + " optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime):  \n" + str(optimizedDuration) + "\n"
+
+
 completeTime = datetime.now() + optimizedDuration
 
 completeTimeString = completeTime.strftime(timeFormat)

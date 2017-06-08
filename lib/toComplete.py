@@ -106,10 +106,7 @@ if os.path.isfile(activityProgressedDurationPath):
     print "################################################################"
     print "# Parsing activityProgressedDuration for " + activityIdToComplete+" #"
     print "################################################################"
-
     activityProgressedDurationList = list()
-
-
     with open(activityProgressedDurationPath) as activityProgressedDurationListFile:
         activityProgressedDurationListString= activityProgressedDurationListFile.read()
     activityProgressedDurationList = activityProgressedDurationListString.strip().split("\n")

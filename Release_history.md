@@ -1,3 +1,5 @@
+2017/06/08
+- update updater to fix new bug involved causing file not updated
 2017/06/07
 - update process optimized:avoid override Preference_Configuration.csv during OTA updating
 - [Bug:coverred lines of activities cannot be selected by UiPath]

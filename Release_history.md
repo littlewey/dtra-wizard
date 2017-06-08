@@ -1,5 +1,18 @@
 2017/06/08
 - update updater to fix new bug involved causing file not updated
+    + It's found by Summer complete workflow didnt work as expected
+    + Root cause: toComplete.py was not updated in latest update
+    + Solution: corrected updater program, wipe wizard folder and reinstall
+    + Status: [passed]
+- [unexpected siutation on "SiteName not empty"] [ongoing]
+    + During test from Core Design team(Stephen Yang), it's found not all IWP activities are with Sitename empty, this requires changing of activity list.
+    + Solution: update selfcheck process and modify adjustment of activitylist column order
+    + Status: initial test[Passed], further test[will be done by Summer]
+- [Bug:status changed but not shown changed][consider passed]
+    + Root cause:suspect bugs of DTRA web client triggerred by close window very fast
+    + Workaround: add delay 2 seconds
+    + Status: issue not occured anymore
+    + updated action:changed delay time from 2 seconds to 3 seconds on safe side
 2017/06/07
 - update process optimized:avoid override Preference_Configuration.csv during OTA updating
 - [Bug:coverred lines of activities cannot be selected by UiPath]

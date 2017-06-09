@@ -1,3 +1,5 @@
+2017/06/09
+- workflow modified to be Compatible with SPM client view
 2017/06/08
 - update updater to fix new bug involved causing file not updated
     + It's found by Summer complete workflow didnt work as expected

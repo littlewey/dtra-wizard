@@ -85,11 +85,10 @@ print str(datetime.now()) + " optimizedDuration with  completeScheduleRate:  \n"
 
 
 actionDelayAdjustmentTime = 60
-optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime)
+optimizedDuration = (optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime)) if optimizedDuration.total_seconds() > actionDelayAdjustmentTime*2 else timedelta(seconds= actionDelayAdjustmentTime*2)
 
 # log
 print str(datetime.now()) + " optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime):  \n" + str(optimizedDuration) + "\n"
-
 
 completeTime = datetime.now() + optimizedDuration
 

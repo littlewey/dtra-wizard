@@ -67,7 +67,7 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
     # assemble parsedActivityTable
 
     outputListForAppending = [itemProjectName, itemWorkPackage, itemActivityID, itemPriority, itemStatus, itemActualStart, itemActualFinish, itemActualDueDate, itemDuration ]
-    if itemStatus != "Com":
+    if itemStatus in ["Pau","InP","Dis"]:
         parsedActivityTable = parsedActivityTable + '\t'.join(outputListForAppending) + '\n'
 
     # handling state
@@ -81,7 +81,7 @@ for activityItem in activityListUrgly.split('W6.Web.UI.Controls.W6DataGrid+W6Dat
 
     # for myActivityList
     myActivityListForAppending = [itemActivityID, itemStatus, itemActivityName]
-    if itemStatus != "Com":
+    if itemStatus in ["Pau","InP","Dis"]:
         myActivityList = myActivityList + '\t'.join(myActivityListForAppending) + '\n'
 
 with open(activityListFileBeautifiedPath,'w') as outputFile:

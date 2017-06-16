@@ -1,3 +1,7 @@
+2017/06/16
+- lib/activityListParser.py [adjustment for SPM] consider other statuses apart from Pau,InP,Dis
+- lib/state2_timeStamp_schtasksBuilding.py [Improvement for schtasks] consider start time earlier than now
+- state3_timeStamp_schtasksBuilding.py [Improvement for schtasks] consider start time earlier than now
 2017/06/09
 - workflow modified to be Compatible with SPM client view
 2017/06/08

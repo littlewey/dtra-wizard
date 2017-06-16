@@ -133,7 +133,7 @@ optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustment
 print str(datetime.now()) + " optimizedDuration = optimizedDuration - timedelta(seconds= actionDelayAdjustmentTime):  \n" + str(optimizedDuration) + "\n"
 
 
-leftDuration = optimizedDuration - sumActivityProgressedDuration
+leftDuration = (optimizedDuration - sumActivityProgressedDuration) if (optimizedDuration - sumActivityProgressedDuration).total_seconds() > actionDelayAdjustmentTime else timedelta(seconds= actionDelayAdjustmentTime*2)
 
 # log
 print str(datetime.now()) + " leftDuration:  \n" + str(leftDuration) + "\n"

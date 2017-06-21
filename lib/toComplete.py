@@ -128,11 +128,12 @@ if os.path.isfile(activityProgressedDurationPath):
     print str(datetime.now()) + " sumActivityProgressedDuration : \n" + str(sumActivityProgressedDuration) + "\n"
 else:
     # log
-    print str(datetime.now()) + " C:\uiPath\var\activityProgressedDuration.record not exist: \n"
+    print str(datetime.now()) + r" C:\uiPath\var\activityProgressedDuration.record not exist: \n"
     sumActivityProgressedDuration = timedelta(minutes=0)
 ################################################################################
 
 leftDuration = optimizedDuration - sumActivityProgressedDuration - activityProgressedDuration
+
 # log
 print str(datetime.now()) + " leftDuration:  \n" + str(leftDuration) + "\n"
 
@@ -147,8 +148,11 @@ with open(state1_ifCompeleteNowPath,'w') as state1_ifCompeleteNowFile:
 
 completeTime = datetime.now() + (leftDuration if leftDuration.total_seconds() > intervalTimerNextStart else timedelta(minutes=7))
 
+# schedule next start time
+intervalTimerNextActivity = 120
+
 if state1_ifCompeleteNow != "0":
-    completeTime = datetime.now() + timedelta(seconds=70)
+    completeTime = datetime.now() + timedelta(seconds=intervalTimerNextActivity)
 
 timeFormat = '%m/%d/%Y-%H:%M'
 completeTimeString = completeTime.strftime(timeFormat)

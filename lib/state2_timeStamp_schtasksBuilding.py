@@ -60,7 +60,7 @@ if os.path.isfile(activityProgressedDurationPath):
     print str(datetime.now()) + " sumActivityProgressedDuration : \n" + str(sumActivityProgressedDuration) + "\n"
 else:
     # log
-    print str(datetime.now()) + " C:\uiPath\var\activityProgressedDuration.record not exist: \n"
+    print str(datetime.now()) + r" C:\uiPath\var\activityProgressedDuration.record not exist: \n"
     sumActivityProgressedDuration = timedelta(minutes=0)
 ################################################################################
 

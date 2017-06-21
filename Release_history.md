@@ -1,3 +1,6 @@
+2017/06/21
+- fix project name with spaces
+- fix toComplete.py next activity start time earlier than now().
 2017/06/16
 - lib/activityListParser.py [adjustment for SPM] consider other statuses apart from Pau,InP,Dis
 - lib/state2_timeStamp_schtasksBuilding.py [Improvement for schtasks] consider start time earlier than now

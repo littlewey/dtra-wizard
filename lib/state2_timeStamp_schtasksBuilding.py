@@ -103,8 +103,8 @@ with open(activityListFileBeautifiedPath) as activityListFile:
 activityList = activityListString.strip().split("\n")
 
 for line in activityList:
-    if activityIdStarted == line.split()[2]:
-        durationString = line.split()[8]
+    if activityIdStarted == line.split("\t")[2]:
+        durationString = line.split("\t")[8]
 
 plannedDuration = timedelta(hours=int(durationString.split(":")[0]),minutes=int(durationString.split(":")[1])) 
 

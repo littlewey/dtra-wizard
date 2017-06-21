@@ -60,10 +60,10 @@ print str(datetime.now()) + " lastStartActivityDate : \n" + lastStartActivityDat
 with open(activityListFileBeautifiedPath) as activityListFile:
     activityListString= activityListFile.read()
 activityList = activityListString.strip().split("\n")
-
+print "here " + activityIdStarted
 for line in activityList:
-    if activityIdStarted == line.split()[2]:
-        durationString = line.split()[8]
+    if activityIdStarted == line.split("\t")[2]:
+        durationString = line.split("\t")[8]
 
 duration = timedelta(hours=int(durationString.split(":")[0]),minutes=int(durationString.split(":")[1])) 
 

@@ -32,8 +32,8 @@ durationString = str()
 
 # plannedDuration
 for line in activityList:
-    if inProgressActivity == line.split()[2]:
-        durationString = line.split()[8]
+    if inProgressActivity == line.split("\t")[2]:
+        durationString = line.split("\t")[8]
 plannedDuration = timedelta(hours=int(durationString.split(":")[0]),minutes=int(durationString.split(":")[1])) 
 # log
 print str(datetime.now()) + " plannedDuration for " + activityIdToComplete + ": \n" + str(plannedDuration) + "\n"

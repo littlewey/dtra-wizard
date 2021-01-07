@@ -332,7 +332,7 @@
                                                 </If.Else>
                                               </If>
                                               <Sequence DisplayName="Change status action" sap2010:WorkflowViewState.IdRef="Sequence_183">
-                                                <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_53" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://***REMOVED***/ClickScheduleWebClient/Default.aspx' /&gt;">
+                                                <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_53" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://dummy/ClickScheduleWebClient/Default.aspx' /&gt;">
                                                   <ui:WindowScope.Body>
                                                     <ActivityAction x:TypeArguments="x:Object">
                                                       <ActivityAction.Argument>
@@ -624,7 +624,7 @@
                                                       </If>
                                                     </Sequence>
                                                     <Sequence DisplayName="Change status action" sap2010:WorkflowViewState.IdRef="Sequence_232">
-                                                      <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_59" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://***REMOVED***/ClickScheduleWebClient/Default.aspx' /&gt;">
+                                                      <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_59" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://dummy/ClickScheduleWebClient/Default.aspx' /&gt;">
                                                         <ui:WindowScope.Body>
                                                           <ActivityAction x:TypeArguments="x:Object">
                                                             <ActivityAction.Argument>
@@ -786,7 +786,7 @@
                                                 </If.Else>
                                               </If>
                                               <Sequence DisplayName="Change status action" sap2010:WorkflowViewState.IdRef="Sequence_218">
-                                                <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_56" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://***REMOVED***/ClickScheduleWebClient/Default.aspx' /&gt;">
+                                                <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_56" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://dummy/ClickScheduleWebClient/Default.aspx' /&gt;">
                                                   <ui:WindowScope.Body>
                                                     <ActivityAction x:TypeArguments="x:Object">
                                                       <ActivityAction.Argument>

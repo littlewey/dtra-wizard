@@ -19,7 +19,7 @@
 # localhost name resolution is handled within DNS itself.
 #	127.0.0.1       localhost, 
 #	::1             localhost
-10.0.200.11 ***REMOVED***
-***REMOVED*** ***REMOVED***
+10.0.200.11 dummy
+dummy140 dummy
 127.0.0.1 localhost
-***REMOVED***.188 ubuntu
+146.11.40.188 ubuntu

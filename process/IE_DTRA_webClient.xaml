@@ -60,7 +60,7 @@
       <AssemblyReference>System.Xaml</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="IE: open DTRA web Client" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_3" NewSession="True" Private="False" Url="https://***REMOVED***/ClickScheduleWebClient/Default.aspx">
+  <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="IE: open DTRA web Client" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_3" NewSession="True" Private="False" Url="https://dummy/ClickScheduleWebClient/Default.aspx">
     <ui:OpenBrowser.Body>
       <ActivityAction x:TypeArguments="x:Object">
         <ActivityAction.Argument>

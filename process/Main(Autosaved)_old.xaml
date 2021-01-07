@@ -128,7 +128,7 @@
               </Sequence>
             </ui:CommentOut.Body>
           </ui:CommentOut>
-          <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open https://***REMOVED***/ClickScheduleWebClient/Default.aspx" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" NewSession="True" Private="False" Url="https://***REMOVED***/ClickScheduleWebClient/Default.aspx">
+          <ui:OpenBrowser UiBrowser="{x:Null}" BrowserType="IE" DisplayName="Open https://dummy/ClickScheduleWebClient/Default.aspx" Hidden="False" sap2010:WorkflowViewState.IdRef="OpenBrowser_2" NewSession="True" Private="False" Url="https://dummy/ClickScheduleWebClient/Default.aspx">
             <ui:OpenBrowser.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -427,7 +427,7 @@
           </If.Else>
         </If>
         <Sequence DisplayName="Recording Sequence" sap2010:WorkflowViewState.IdRef="Sequence_72">
-          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_28" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://***REMOVED***/ClickScheduleWebClient/Default.aspx' /&gt;">
+          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_28" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://dummy/ClickScheduleWebClient/Default.aspx' /&gt;">
             <ui:WindowScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -570,7 +570,7 @@
           </If.Else>
         </If>
         <Sequence DisplayName="Recording Sequence" sap2010:WorkflowViewState.IdRef="Sequence_86">
-          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_36" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://***REMOVED***/ClickScheduleWebClient/Default.aspx' /&gt;">
+          <ui:WindowScope ApplicationWindow="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" Window="{x:Null}" DisplayName="Attach Window 'Httpsdtra Page'" sap2010:WorkflowViewState.IdRef="WindowScope_36" InformativeScreenshot="1de4d9b70f878c577daec7dbf7fb2f58" Selector="&lt;html url='https://dummy/ClickScheduleWebClient/Default.aspx' /&gt;">
             <ui:WindowScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
